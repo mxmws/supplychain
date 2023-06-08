@@ -21,8 +21,18 @@ contract Supplychain is Ownable {
     struct product {
         bool isValue;
         string name;
-        uint[] successorIds; // maybe use mappings instead. Disadvantage of mappings is that we can't get keys or values without knowing the keys
+        
+        mapping (uint => bool) successorIdIsHandshakeCandidate;
+        mapping (uint => bool) predecessorIdIsHandshakeCandidate;
+
+        mapping (uint => uint) successorIdToArrayIndex;
+        mapping (uint => uint) predecessorIdToArrayIndex;
+
+        uint[] successorIds; 
         uint[] predecessorIds;
+
+        uint[] labelIds;
+
         uint carbonFootprint;
     }
 
@@ -58,6 +68,17 @@ contract Supplychain is Ownable {
         uint _predecessorProductId,
         uint _successorProductId
     );
+
+
+    // this function shouldn't cost gas (not sure why it says infinite)
+    function getProduct(uint _id) public view returns
+    (string memory name, uint[] memory successorIds, uint[] memory predecessorIds, 
+    uint[] memory labelIds, uint carbonFootprint){
+        require(labels[_id].isValue, "Product doesn't exist");
+        product storage myProduct = products[_id];
+        return (myProduct.name, myProduct.successorIds, myProduct.predecessorIds, 
+        myProduct.labelIds, myProduct.carbonFootprint);
+    }
     
     function addLabel(uint _id, string memory _name, uint _productId) public {
         require(!labels[_id].isValue, "Label with this ID already exists");
@@ -68,7 +89,14 @@ contract Supplychain is Ownable {
 
     function addProduct(uint _id, string memory _name, uint[] memory _successors, uint[] memory _predecessors, uint _carbonFootprint) public {
         require(!products[_id].isValue, "Product with this ID already exists");
-        products[_id] = product(true, _name, _successors, _predecessors, _carbonFootprint);
+
+        // this is probably not the best way to do it but can't use constructor because struct contains mappings
+        products[_id].isValue = true;
+        products[_id].name = _name;
+        products[_id].successorIds = _successors;
+        products[_id].predecessorIds = _predecessors;
+        products[_id].carbonFootprint = _carbonFootprint;
+
         // ToDo: Handshake
         emit ProductAdded(msg.sender, _id, _name); // event will be on the blockchain forever
     }
@@ -80,17 +108,9 @@ contract Supplychain is Ownable {
         // check if both products exist
         require(products[_predecessorProductId].isValue && products[_successorProductId].isValue, "One or both products don't exist");
 
-        // get products // ToDo: probably shouldn't be storage
-        product storage predecessorProduct = products[_predecessorProductId];
-        product storage successorProduct = products[_successorProductId];
-
         // add links to products
-        predecessorProduct.successorIds.push(_successorProductId);
-        successorProduct.predecessorIds.push(_predecessorProductId);
-
-        // update products on chain
-        products[_predecessorProductId] = predecessorProduct;
-        products[_successorProductId] = successorProduct;
+        products[_predecessorProductId].successorIds.push(_successorProductId);
+        products[_successorProductId].predecessorIds.push(_predecessorProductId);
 
         emit LinkAdded(msg.sender, _predecessorProductId, _successorProductId);
     }
@@ -125,14 +145,10 @@ contract Supplychain is Ownable {
         }
 
         // remove the links
-        delete predecessorProduct.successorIds[predecessorIndex];
-        delete successorProduct.predecessorIds[successorIndex];
-
-        // update products on chain
-        products[_predecessorProductId] = predecessorProduct;
-        products[_successorProductId] = successorProduct;
+        delete products[_predecessorProductId].successorIds[predecessorIndex];
+        delete products[_successorProductId].predecessorIds[successorIndex];
 
         emit LinkRemoved(msg.sender, _predecessorProductId, _successorProductId);
-}
+    }
 
 }
