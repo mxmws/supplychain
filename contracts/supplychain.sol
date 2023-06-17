@@ -18,20 +18,22 @@ contract Ownable {
 
 contract Supplychain is Ownable {
 
+    // move to ownalbe contract
     struct product {
         bool isValue;
         string name;
+        //address owner;        //TODO add owner
         
-        mapping (uint => bool) successorIdIsHandshakeCandidate;
-        mapping (uint => bool) predecessorIdIsHandshakeCandidate;
+        mapping (address => bool) successorIdIsHandshakeCandidate;
+        mapping (address => bool) predecessorIdIsHandshakeCandidate;
 
         mapping (uint => uint) successorIdToArrayIndex;
         mapping (uint => uint) predecessorIdToArrayIndex;
 
-        uint[] successorIds; 
-        uint[] predecessorIds;
+        address[] successorIds; 
+        address[] predecessorIds;
 
-        uint[] labelIds;
+        address[] labelIds;
 
         uint carbonFootprint;
     }
@@ -42,52 +44,51 @@ contract Supplychain is Ownable {
         uint productId;
     }
 
-    mapping (uint => product) products;
-    mapping (uint => label) labels;
+    mapping (address => product) products;
+    mapping (address => label) labels;
 
     event ProductAdded(
         address indexed _user,
-        uint _id,
+        address _id,
         string _name
     );
 
     event LabelAdded(
         address indexed _user,
-        uint _id,
+        address _id,
         string _name
     );
 
     event LinkAdded(
         address indexed _user,
-        uint _predecessorProductId,
-        uint _successorProductId
+        address _predecessorProductId,
+        address _successorProductId
     );
 
     event LinkRemoved(
         address indexed _user,
-        uint _predecessorProductId,
-        uint _successorProductId
+        address _predecessorProductId,
+        address _successorProductId
     );
 
-
     // this function shouldn't cost gas (not sure why it says infinite)
-    function getProduct(uint _id) public view returns
-    (string memory name, uint[] memory successorIds, uint[] memory predecessorIds, 
-    uint[] memory labelIds, uint carbonFootprint){
+    function getProduct(address _id) public view returns
+    (string memory name, address[] memory successorIds, address[] memory predecessorIds, 
+    address[] memory labelIds, uint carbonFootprint){
         require(labels[_id].isValue, "Product doesn't exist");
         product storage myProduct = products[_id];
         return (myProduct.name, myProduct.successorIds, myProduct.predecessorIds, 
         myProduct.labelIds, myProduct.carbonFootprint);
     }
     
-    function addLabel(uint _id, string memory _name, uint _productId) public {
+    function addLabel(address _id, string memory _name, uint _productId) public {
         require(!labels[_id].isValue, "Label with this ID already exists");
         labels[_id] = label(true, _name, _productId);
         // ToDo: Handshake
         emit LabelAdded(msg.sender, _id, _name);
     }
 
-    function addProduct(uint _id, string memory _name, uint[] memory _successors, uint[] memory _predecessors, uint _carbonFootprint) public {
+    function addProduct(address _id, string memory _name, address[] memory _successors, address[] memory _predecessors, uint _carbonFootprint) public {
         require(!products[_id].isValue, "Product with this ID already exists");
 
         // this is probably not the best way to do it but can't use constructor because struct contains mappings
@@ -101,9 +102,18 @@ contract Supplychain is Ownable {
         emit ProductAdded(msg.sender, _id, _name); // event will be on the blockchain forever
     }
 
-    function addLink(uint _predecessorProductId, uint _successorProductId) public {
+    function addLink(address _predecessorProductId, address _successorProductId) public  {
         // ToDo: Handshake / checking ownership
+        //1. check product in othter contract if self was added as candidate   
+            //no: enter other address into respective candidate mapping
+            //return
+        //2. yes: delete self in other candidate mapping
+        //3. update own successor/predecessor mapping
+        //4. update other successor/predecessor mapping
+            //--> how to handle ownership and stop attackers from deleting random products
+        
         // ToDo: make sure link doesn't exist yet
+        
 
         // check if both products exist
         require(products[_predecessorProductId].isValue && products[_successorProductId].isValue, "One or both products don't exist");
@@ -115,7 +125,7 @@ contract Supplychain is Ownable {
         emit LinkAdded(msg.sender, _predecessorProductId, _successorProductId);
     }
 
-    function removeLink(uint _predecessorProductId, uint _successorProductId) public {
+    function removeLink(address _predecessorProductId, address _successorProductId) public {
         // Todo: Problem: searching an array can be very expensive
         // check if both products exist
         require(products[_predecessorProductId].isValue && products[_successorProductId].isValue, "One or both products don't exist");
