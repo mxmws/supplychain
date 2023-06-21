@@ -65,10 +65,11 @@
 	},
 	"sources": {
 		"contracts/Ownable.sol": {
-			"keccak256": "0x939ae365ca3321261397463742fe02ad21e29b9186beeae37ac1ddbdd38f34d7",
+			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
+			"license": "GPL-3.0-or-later",
 			"urls": [
-				"bzz-raw://af95eefe1e2c59c8f6d854d1962357ef4399138c447704f87e4e5787962d80b3",
-				"dweb:/ipfs/QmcF1tEET9KqU7k1FNoC5MPP5KUNAkpvjeuuJCfg3xpxfc"
+				"bzz-raw://3d5a0e925546a5f5d969d37aac7092e58470562632e311c43d5fd6fce94af475",
+				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
 			]
 		}
 	},

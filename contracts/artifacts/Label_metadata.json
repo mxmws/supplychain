@@ -6,6 +6,20 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"name": "Accept_PredecessorCandidate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Accept_SuccessorCandidate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -16,6 +30,70 @@
 				"name": "ChangeOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "predecessor_address",
+						"type": "address"
+					}
+				],
+				"name": "Do_Handshake_To_Predecessor",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "successor_address",
+						"type": "address"
+					}
+				],
+				"name": "Do_Handshake_To_Successor",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "predecessorAddress",
+						"type": "address"
+					}
+				],
+				"name": "Has_PredecessorCandidate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "successorAddress",
+						"type": "address"
+					}
+				],
+				"name": "Has_SuccessorCandidate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -323,25 +401,27 @@
 	},
 	"sources": {
 		"contracts/Label.sol": {
-			"keccak256": "0x260ad971adb05f128b42195f2d3f9047614a4752fcb6760a3ba64b0696908e15",
+			"keccak256": "0x3813415c3cbcc60342e3b30f8ad23ddfe49f32f76461047ae66223b652e090ce",
+			"license": "MIT",
 			"urls": [
-				"bzz-raw://940552cddf919d3832304d4eba2703aa7a036100b98413072c10c9eb9420a750",
-				"dweb:/ipfs/QmZyEvcGBdm9cGa6tXWTEhWn4HQxaHsyukh9EgrbBu262F"
+				"bzz-raw://25550c2b00406bfb9ec236f82225bec0fc78e93d02ba6f7fe6ec1d298690fd16",
+				"dweb:/ipfs/QmcF2MTmVu1rDscbgnocQTGVTQ6UVX9v6rF2mL48xVJ6Bh"
 			]
 		},
 		"contracts/Ownable.sol": {
-			"keccak256": "0x939ae365ca3321261397463742fe02ad21e29b9186beeae37ac1ddbdd38f34d7",
+			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
+			"license": "GPL-3.0-or-later",
 			"urls": [
-				"bzz-raw://af95eefe1e2c59c8f6d854d1962357ef4399138c447704f87e4e5787962d80b3",
-				"dweb:/ipfs/QmcF1tEET9KqU7k1FNoC5MPP5KUNAkpvjeuuJCfg3xpxfc"
+				"bzz-raw://3d5a0e925546a5f5d969d37aac7092e58470562632e311c43d5fd6fce94af475",
+				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
 			]
 		},
 		"contracts/Product.sol": {
-			"keccak256": "0x90cbb47c9a181e2b995f6f06d83230d5fc69d0bceb906b179baf2028969e655d",
+			"keccak256": "0x52e25690b97cdc37f1c4bb8fad2318ecf9fa2b40050db3e8e806e7f9a9646a17",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0dd41f8138f52c3bcaee49f3915a7bd74a3f506703b53aba6824116c99f6a193",
-				"dweb:/ipfs/QmdgERPYroKnETBTXeucJ7k7rzXKAWu74LuLc6gXjcs1Mt"
+				"bzz-raw://a3041ff80ffa8bdd2e106703973f3fcf00a18e866890fbbd77a559e15be1bc7e",
+				"dweb:/ipfs/QmVHNCPeRZ5MdfJXYP7zLYvWywHT8Do6fNHusfSKFVyLvX"
 			]
 		}
 	},

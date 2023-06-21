@@ -42,7 +42,6 @@ contract Supplychain {
     function getProduct(address _id) public view returns(Product){
         // require(labels[_id].GetOwner() != address(0), "Product doesn't exist");
         Product myProduct = products[_id];
-        address x = myProduct.owner();  
         return myProduct;
     }
     
@@ -57,11 +56,10 @@ contract Supplychain {
         require(products[_address].owner() != address(0), "Product with this ID already exists");
 
         // this is probably not the best way to do it but can't use constructor because struct contains mappings
-        products[_address].isValue = true;
-        products[_address].name = _name;
-        products[_address].successorIds = _successors;
-        products[_address].predecessorIds = _predecessors;
-        products[_address].carbonFootprint = _carbonFootprint;
+        Product prod = new Product(_name, _carbonFootprint);
+        prod.Set_SuccessorIds(_successors);
+        prod.Set_PredecessorIds(_predecessors);
+        prod.Set_CarbonFootPrint(_carbonFootprint);
 
         // ToDo: Handshake
         emit ProductAdded(msg.sender, _address, _name); // event will be on the blockchain forever
@@ -81,11 +79,16 @@ contract Supplychain {
         
 
         // check if both products exist
-        require(products[_predecessorProductId].isValue && products[_successorProductId].isValue, "One or both products don't exist");
+        Product predecessor = products[_predecessorProductId]; 
+        Product successor = products[_successorProductId];
+        require(predecessor.isValue() && successor.isValue(), "One or both products don't exist");
 
-        // add links to products
-        products[_predecessorProductId].successorIds.push(_successorProductId);
-        products[_successorProductId].predecessorIds.push(_predecessorProductId);
+        if(predecessor.Do_Handshake_To_Successor(_successorProductId)){
+            //handshake successfull, predecessor_candidate of successor was removed (set to false)
+        }
+        else{
+            successor.Do_Handshake_To_Predecessor(_predecessorProductId);
+        }
 
         emit LinkAdded(msg.sender, _predecessorProductId, _successorProductId);
     }
@@ -93,35 +96,35 @@ contract Supplychain {
     function removeLink(address _predecessorProductId, address _successorProductId) public {
         // Todo: Problem: searching an array can be very expensive
         // check if both products exist
-        require(products[_predecessorProductId].isValue && products[_successorProductId].isValue, "One or both products don't exist");
+        require(products[_predecessorProductId].isValue() && products[_successorProductId].isValue(), "One or both products don't exist");
 
         // get products
-        Product predecessorProduct = products[_predecessorProductId];
-        Product successorProduct = products[_successorProductId];
+        Product predecessor = products[_predecessorProductId];
+        Product successor = products[_successorProductId];
 
         // remove links from products
         uint predecessorIndex;
         uint successorIndex;
 
         // find index of _successorProductId in predecessor's successors
-        for (uint i = 0; i < predecessorProduct.successorIds.length; i++) {
-            if (predecessorProduct.successorIds[i] == _successorProductId) {
+        for (uint i = 0; i < predecessor.Get_Successor_Count(); i++) {
+            if (predecessor.successorIds(i) == _successorProductId) {
                 predecessorIndex = i;
                 break;
             }
         }
 
         // find index of _predecessorProductId in successor's predecessors
-        for (uint i = 0; i < successorProduct.predecessorIds.length; i++) {
-            if (successorProduct.predecessorIds[i] == _predecessorProductId) {
+        for (uint i = 0; i < successor.Get_Predecessor_Count(); i++) {
+            if (successor.predecessorIds(i) == _predecessorProductId) {
                 successorIndex = i;
                 break;
             }
         }
 
         // remove the links
-        delete products[_predecessorProductId].successorIds[predecessorIndex];
-        delete products[_successorProductId].predecessorIds[successorIndex];
+        // delete products[_predecessorProductId].successorIds[predecessorIndex];
+        // delete products[_successorProductId].predecessorIds[successorIndex];
 
         emit LinkRemoved(msg.sender, _predecessorProductId, _successorProductId);
     }

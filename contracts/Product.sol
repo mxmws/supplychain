@@ -5,7 +5,7 @@ import "./Ownable.sol";
 
 contract Product is Ownable{
     
-    bool public isValue;
+    bool public isValue  = false;
     string public name;
 
     mapping(address => bool) public successorIdIsHandshakeCandidate;
@@ -23,9 +23,12 @@ contract Product is Ownable{
 
     string public swarm_storage_address;
 
-    function return_int() public returns(int){
-        return 0;
+    constructor(string memory _name, uint _carbonFootprint) Ownable() {
+        name = _name;
+        carbonFootprint = _carbonFootprint;
+        isValue= true;
     }
+    //region setter functions
     function Set_Name(string calldata new_name) public onlyOwner{
         name = new_name;
     }
@@ -49,7 +52,66 @@ contract Product is Ownable{
     function Set_IsValue(bool value) public onlyOwner{
         isValue = value;
     }
+    //endregion setter functions
 
-    // function Append  
+    //region getter functios
+    function Get_Successor_Count() external view returns(uint256){
+        return successorIds.length;
+    }
+
+    function Get_Predecessor_Count() external view returns(uint256){
+        return predecessorIds.length;
+    }
+    // endregion getter functions
+
+    //region hand shake
+    function Has_SuccessorCandidate(address successorAddress) public view returns(bool){
+        return successorIdIsHandshakeCandidate[successorAddress];
+    }
+
+    function Has_PredecessorCandidate(address predecessorAddress) public view returns(bool){
+        return successorIdIsHandshakeCandidate[predecessorAddress];
+    }
     
+    function Accept_SuccessorCandidate() external {
+        require(successorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for successorship.");
+
+        successorIdIsHandshakeCandidate[msg.sender] = false;
+
+    }
+
+    function Accept_PredecessorCandidate() external {
+        require(predecessorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for predecessorship.");
+        predecessorIdIsHandshakeCandidate[msg.sender] = false;
+    }
+
+    function Do_Handshake_To_Successor(address successor_address) public returns(bool){
+        Product successor = Product(successor_address);
+
+        if(successor.Has_PredecessorCandidate(address(this))){
+            successorIds.push(successor_address);
+            successor.Accept_PredecessorCandidate();
+            return true;
+        }
+        else{
+            successorIdIsHandshakeCandidate[successor_address] = true;
+            return false;
+        }
+    }
+    
+    function Do_Handshake_To_Predecessor(address predecessor_address) public returns(bool){
+        Product predecessor = Product(predecessor_address);
+
+        if(predecessor.Has_PredecessorCandidate(address(this))){
+            predecessorIds.push(predecessor_address);
+            predecessor.Accept_SuccessorCandidate();
+
+            return true;
+        }
+        else{
+            predecessorIdIsHandshakeCandidate[predecessor_address];
+            return false;
+        }
+    }
+    //endregion hand shake
 }
