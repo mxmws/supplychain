@@ -1,50 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.18;
 
-// maybe this will be useful in the future idk
-contract Ownable {
-    address owner;
+import "./Product.sol";
+import "./Label.sol";
 
-    constructor() {
-        owner = msg.sender;
-    }
-
-    modifier onlyOwner {
-        require(msg.sender == owner, 'caller must be owner');
-        _;
-    }
-}
-
-
-contract Supplychain is Ownable {
-
-    // move to ownalbe contract
-    struct product {
-        bool isValue;
-        string name;
-        //address owner;        //TODO add owner
-        
-        mapping (address => bool) successorIdIsHandshakeCandidate;
-        mapping (address => bool) predecessorIdIsHandshakeCandidate;
-
-        mapping (uint => uint) successorIdToArrayIndex;
-        mapping (uint => uint) predecessorIdToArrayIndex;
-
-        address[] successorIds; 
-        address[] predecessorIds;
-
-        address[] labelIds;
-
-        uint carbonFootprint;
-    }
-
+contract Supplychain {
     struct label {
         bool isValue;
         string name;
         uint productId;
     }
 
-    mapping (address => product) products;
+    mapping (address => Product) products;
     mapping (address => label) labels;
 
     event ProductAdded(
@@ -72,13 +39,11 @@ contract Supplychain is Ownable {
     );
 
     // this function shouldn't cost gas (not sure why it says infinite)
-    function getProduct(address _id) public view returns
-    (string memory name, address[] memory successorIds, address[] memory predecessorIds, 
-    address[] memory labelIds, uint carbonFootprint){
-        require(labels[_id].isValue, "Product doesn't exist");
-        product storage myProduct = products[_id];
-        return (myProduct.name, myProduct.successorIds, myProduct.predecessorIds, 
-        myProduct.labelIds, myProduct.carbonFootprint);
+    function getProduct(address _id) public view returns(Product){
+        // require(labels[_id].GetOwner() != address(0), "Product doesn't exist");
+        Product myProduct = products[_id];
+        address x = myProduct.owner();  
+        return myProduct;
     }
     
     function addLabel(address _id, string memory _name, uint _productId) public {
@@ -88,18 +53,18 @@ contract Supplychain is Ownable {
         emit LabelAdded(msg.sender, _id, _name);
     }
 
-    function addProduct(address _id, string memory _name, address[] memory _successors, address[] memory _predecessors, uint _carbonFootprint) public {
-        require(!products[_id].isValue, "Product with this ID already exists");
+    function addProduct(address _address, string memory _name, address[] memory _successors, address[] memory _predecessors, uint _carbonFootprint) public {
+        require(products[_address].owner() != address(0), "Product with this ID already exists");
 
         // this is probably not the best way to do it but can't use constructor because struct contains mappings
-        products[_id].isValue = true;
-        products[_id].name = _name;
-        products[_id].successorIds = _successors;
-        products[_id].predecessorIds = _predecessors;
-        products[_id].carbonFootprint = _carbonFootprint;
+        products[_address].isValue = true;
+        products[_address].name = _name;
+        products[_address].successorIds = _successors;
+        products[_address].predecessorIds = _predecessors;
+        products[_address].carbonFootprint = _carbonFootprint;
 
         // ToDo: Handshake
-        emit ProductAdded(msg.sender, _id, _name); // event will be on the blockchain forever
+        emit ProductAdded(msg.sender, _address, _name); // event will be on the blockchain forever
     }
 
     function addLink(address _predecessorProductId, address _successorProductId) public  {
@@ -131,8 +96,8 @@ contract Supplychain is Ownable {
         require(products[_predecessorProductId].isValue && products[_successorProductId].isValue, "One or both products don't exist");
 
         // get products
-        product storage predecessorProduct = products[_predecessorProductId];
-        product storage successorProduct = products[_successorProductId];
+        Product predecessorProduct = products[_predecessorProductId];
+        Product successorProduct = products[_successorProductId];
 
         // remove links from products
         uint predecessorIndex;
