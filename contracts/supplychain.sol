@@ -3,16 +3,20 @@ pragma solidity 0.8.18;
 
 import "./Product.sol";
 import "./Label.sol";
+import "./Ownable.sol";
+import "./Label.sol";
 
-contract Supplychain {
-    struct label {
-        bool isValue;
-        string name;
-        uint productId;
-    }
+contract Supplychain is Ownable {
+    
+    string public name;
 
     mapping (address => Product) products;
-    mapping (address => label) labels;
+    mapping (address => Label) labels;
+
+
+    constructor (string memory _name) Ownable() {
+        name=_name;
+    }
 
     event ProductAdded(
         address indexed _user,
@@ -20,7 +24,7 @@ contract Supplychain {
         string _name
     );
 
-    event LabelAdded(
+    event LabelAdded (
         address indexed _user,
         address _id,
         string _name
@@ -46,8 +50,8 @@ contract Supplychain {
     }
     
     function addLabel(address _id, string memory _name, uint _productId) public {
-        require(!labels[_id].isValue, "Label with this ID already exists");
-        labels[_id] = label(true, _name, _productId);
+        require(!labels[_id].IsValue(), "Label with this ID already exists");
+        labels[_id] = new Label(_name, _productId);
         // ToDo: Handshake
         emit LabelAdded(msg.sender, _id, _name);
     }

@@ -6,20 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"name": "Accept_PredecessorCandidate",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "Accept_SuccessorCandidate",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -33,206 +19,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "predecessor_address",
-						"type": "address"
-					}
-				],
-				"name": "Do_Handshake_To_Predecessor",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "successor_address",
-						"type": "address"
-					}
-				],
-				"name": "Do_Handshake_To_Successor",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "predecessorAddress",
-						"type": "address"
-					}
-				],
-				"name": "Has_PredecessorCandidate",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "successorAddress",
-						"type": "address"
-					}
-				],
-				"name": "Has_SuccessorCandidate",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "new_CarbonFootprint",
-						"type": "uint256"
-					}
-				],
-				"name": "Set_CarbonFootPrint",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bool",
-						"name": "value",
-						"type": "bool"
-					}
-				],
-				"name": "Set_IsValue",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "new_LabelIds",
-						"type": "address[]"
-					}
-				],
-				"name": "Set_LabelIds",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "new_name",
-						"type": "string"
-					}
-				],
-				"name": "Set_Name",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "new_predecessorIds",
-						"type": "address[]"
-					}
-				],
-				"name": "Set_PredecessorIds",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "new_successorIds",
-						"type": "address[]"
-					}
-				],
-				"name": "Set_SuccessorIds",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "carbonFootprint",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "isValue",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "labelIds",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -240,133 +26,6 @@
 						"internalType": "address",
 						"name": "",
 						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "predecessorIdIsHandshakeCandidate",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "predecessorIdToArrayIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "predecessorIds",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "successorIdIsHandshakeCandidate",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "successorIdToArrayIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "successorIds",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "swarm_storage_address",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -401,11 +60,11 @@
 	},
 	"sources": {
 		"contracts/Label.sol": {
-			"keccak256": "0x3813415c3cbcc60342e3b30f8ad23ddfe49f32f76461047ae66223b652e090ce",
+			"keccak256": "0xc65ab1870d45377d0f19d0688ca323c9bfedb169753b1ef83fc2f5d26fd25e48",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://25550c2b00406bfb9ec236f82225bec0fc78e93d02ba6f7fe6ec1d298690fd16",
-				"dweb:/ipfs/QmcF2MTmVu1rDscbgnocQTGVTQ6UVX9v6rF2mL48xVJ6Bh"
+				"bzz-raw://eb30c93a90cd877eeeccb2ffc44b54ef650f8e358bebf428cdfe93a655a88163",
+				"dweb:/ipfs/QmbDqgUTy1c7mH5ieD4mn66Qb279XT5hWiwvdKunnDnPqe"
 			]
 		},
 		"contracts/Ownable.sol": {
@@ -417,11 +76,11 @@
 			]
 		},
 		"contracts/Product.sol": {
-			"keccak256": "0x52e25690b97cdc37f1c4bb8fad2318ecf9fa2b40050db3e8e806e7f9a9646a17",
+			"keccak256": "0x700f80c0a1b29a48347f4e01def2242265288bbe298af48e39101484a071fb43",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a3041ff80ffa8bdd2e106703973f3fcf00a18e866890fbbd77a559e15be1bc7e",
-				"dweb:/ipfs/QmVHNCPeRZ5MdfJXYP7zLYvWywHT8Do6fNHusfSKFVyLvX"
+				"bzz-raw://112725714bbb592cce001044e02e5da9d3a5da59f9353aba95b57ef84412ca05",
+				"dweb:/ipfs/QmdNzVgfPEFqDJWPcLNkA7GjAJYwnGKwvn3nQdd2fkuEpB"
 			]
 		}
 	},

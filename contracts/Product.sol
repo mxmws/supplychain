@@ -7,7 +7,6 @@ contract Product is Ownable{
     
     bool public isValue  = false;
     string public name;
-
     mapping(address => bool) public successorIdIsHandshakeCandidate;
     mapping(address => bool) public predecessorIdIsHandshakeCandidate;
 
@@ -22,7 +21,7 @@ contract Product is Ownable{
     uint public carbonFootprint;
 
     string public swarm_storage_address;
-
+    
     constructor(string memory _name, uint _carbonFootprint) Ownable() {
         name = _name;
         carbonFootprint = _carbonFootprint;
@@ -75,7 +74,6 @@ contract Product is Ownable{
     
     function Accept_SuccessorCandidate() external {
         require(successorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for successorship.");
-
         successorIdIsHandshakeCandidate[msg.sender] = false;
 
     }

@@ -1,0 +1,91 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					}
+				],
+				"name": "AddSupplychain",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/All_Supplychains.sol": "All_Supplychains"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/All_Supplychains.sol": {
+			"keccak256": "0x44b1a2dd84608a674378d64f0cdaef910ccb4799f5f541fce0bb3e19b5b85477",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://0762716aabff18be2dd6f00c799495daff8d489898b05a71923c0cd749d09346",
+				"dweb:/ipfs/QmVfRvh4A3M2RYdKpP4poeQRAqiuDx87jXfdmgHK7Kpg7e"
+			]
+		},
+		"contracts/Label.sol": {
+			"keccak256": "0x3813415c3cbcc60342e3b30f8ad23ddfe49f32f76461047ae66223b652e090ce",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://25550c2b00406bfb9ec236f82225bec0fc78e93d02ba6f7fe6ec1d298690fd16",
+				"dweb:/ipfs/QmcF2MTmVu1rDscbgnocQTGVTQ6UVX9v6rF2mL48xVJ6Bh"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://3d5a0e925546a5f5d969d37aac7092e58470562632e311c43d5fd6fce94af475",
+				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
+			]
+		},
+		"contracts/Product.sol": {
+			"keccak256": "0x700f80c0a1b29a48347f4e01def2242265288bbe298af48e39101484a071fb43",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://112725714bbb592cce001044e02e5da9d3a5da59f9353aba95b57ef84412ca05",
+				"dweb:/ipfs/QmdNzVgfPEFqDJWPcLNkA7GjAJYwnGKwvn3nQdd2fkuEpB"
+			]
+		},
+		"contracts/supplychain.sol": {
+			"keccak256": "0x2d4638ab956a4398b71d5255b660ccec1bb4731f601a00d7eb4a4a9e0a207628",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7b069c934fb98a11ca0940c18d90c4000c995612e10f84b1d522f396765d2681",
+				"dweb:/ipfs/QmZbzzvVakGW1ztRSLaNwpehzZpH9oeqzsGAnKKUa3k7hA"
+			]
+		}
+	},
+	"version": 1
+}
