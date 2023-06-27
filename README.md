@@ -19,7 +19,7 @@ To set up the frontend:
 2. Install dependencies using `npm install`.
 3. Obtain an Infura API key.
 4. Add the key to the appropriate file.
-5. Run the script using `node ./frontend/script.js` to test if everything is working properly.
+5. Run the script using `node ./frontend_and_backend/script.js` to test if everything is working properly.
 
 ### Deploy Contract to Goerli Testnet
 
