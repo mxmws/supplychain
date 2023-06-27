@@ -8,7 +8,7 @@
    - New RPC URL: https://ethereum-goerli.publicnode.com
    - Chain ID: 5
    - Currency symbol: ETH
-   - If the RPC URL doesn't work, search for a new one [here](https://ethereum-goerli.publicnode.com).
+   - If the RPC URL doesn't work, search for a new one [here](https://chainlist.org/chain/5).
 3. Mine at least 0.02 Goerli ETH from [Goerli Faucet](https://goerli-faucet.pk910.de/).
 
 ### Deploy Contract to Goerli Testnet
