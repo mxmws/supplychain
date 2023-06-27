@@ -1,0 +1,281 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_id",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					}
+				],
+				"name": "LabelAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_predecessorProductId",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_successorProductId",
+						"type": "address"
+					}
+				],
+				"name": "LinkAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_predecessorProductId",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_successorProductId",
+						"type": "address"
+					}
+				],
+				"name": "LinkRemoved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_user",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "_id",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					}
+				],
+				"name": "ProductAdded",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_id",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_productId",
+						"type": "uint256"
+					}
+				],
+				"name": "addLabel",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_predecessorProductId",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_successorProductId",
+						"type": "address"
+					}
+				],
+				"name": "addLink",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_address",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_successors",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_predecessors",
+						"type": "address[]"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_carbonFootprint",
+						"type": "uint256"
+					}
+				],
+				"name": "addProduct",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_id",
+						"type": "address"
+					}
+				],
+				"name": "getProduct",
+				"outputs": [
+					{
+						"internalType": "contract Product",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_predecessorProductId",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_successorProductId",
+						"type": "address"
+					}
+				],
+				"name": "removeLink",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/supplychain.sol": "Supplychain"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Label.sol": {
+			"keccak256": "0x3813415c3cbcc60342e3b30f8ad23ddfe49f32f76461047ae66223b652e090ce",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://25550c2b00406bfb9ec236f82225bec0fc78e93d02ba6f7fe6ec1d298690fd16",
+				"dweb:/ipfs/QmcF2MTmVu1rDscbgnocQTGVTQ6UVX9v6rF2mL48xVJ6Bh"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://3d5a0e925546a5f5d969d37aac7092e58470562632e311c43d5fd6fce94af475",
+				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
+			]
+		},
+		"contracts/Product.sol": {
+			"keccak256": "0xc391f076bcdc73c268bd6284773fd4883d6f4a918e2aa2f95c59fcd1a85f3166",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c1a8d00f45203ae3a875c0d44442a79eb5a89aca24b145dd5cf99d03b71b36c1",
+				"dweb:/ipfs/QmXyZeAt2ZoAfjN6wRC8BYoqYberwQTUsb8Smm3iUficPk"
+			]
+		},
+		"contracts/supplychain.sol": {
+			"keccak256": "0x4edc6e2d187b89bd8a9fb571ca2099639664a9a4afa61f6c2e896fd3f62d7997",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://997acccaf4a4087b9e6bd98c60dc8c87aa45122b0870ff42b524f4ed74f1e457",
+				"dweb:/ipfs/QmZGX8TFfAqAttYDNKLWtDiXmPLfzDxY4i4Q4nxh1pCLXM"
+			]
+		}
+	},
+	"version": 1
+}
