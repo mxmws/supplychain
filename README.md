@@ -29,3 +29,19 @@ To deploy a contract on the Goerli Testnet, follow the steps outlined in this [g
 
 *(Information on hosting a node is not provided.)*
 
+## Current Plan for Communication with the Chain
+
+**ETH Node**
+
+- Currently accessible via Infura API (key required)
+- Future: Self-hosted node
+
+**Frontend for Get functions**
+
+- Communicates with ETH Node
+
+**Frontend for Set functions**
+
+- Communicates with ETH Node
+- Requires private ETH key (use signer instead of provider!)
+
