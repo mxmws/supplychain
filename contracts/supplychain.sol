@@ -52,9 +52,9 @@ contract Supplychain {
     ) {
         Product p = products[_id];
         return (
-            p.name(),
-            p.carbonFootprint(),
-            p.swarm_storage_address(),
+            p.Get_Name(),
+            p.Get_CarbonFootprint(),
+            p.Get_IpfsAddress(),
             p.Get_LabelIDs(),
             p.Get_Predecessors(),
             p.Get_Successors()
@@ -77,8 +77,9 @@ contract Supplychain {
         string memory _ipfsAddress
     ) public returns (address) {
         Product prod = new Product(_name, _carbonFootprint);
-        prod.Set_SuccessorIds(_successors);
-        prod.Set_PredecessorIds(_predecessors);
+
+        prod.Set_SuccessorCandadiateIds(_successors);
+        prod.Set_PredecessorCandidateIds(_predecessors);
         prod.Set_CarbonFootPrint(_carbonFootprint);
         prod.Set_LabelIds(_labelIDs);
         prod.Set_IPFS(_ipfsAddress);
@@ -108,7 +109,7 @@ contract Supplychain {
 
     function removeLink(address _predecessorProductId, address _successorProductId) public {
         // check if both products exist
-        require(products[_predecessorProductId].isValue() && products[_successorProductId].isValue(), "One or both products don't exist");
+        require(products[_predecessorProductId].Get_IsValue() && products[_successorProductId].Get_IsValue(), "One or both products don't exist");
 
         // get products
         Product predecessor = products[_predecessorProductId];
@@ -120,7 +121,7 @@ contract Supplychain {
 
         // find index of _successorProductId in predecessor's successors
         for (uint i = 0; i < predecessor.Get_Successor_Count(); i++) {
-            if (predecessor.successorIds(i) == _successorProductId) {
+            if (predecessor.Get_Successors()[i] == _successorProductId) {
                 predecessorIndex = i;
                 break;
             }
@@ -128,7 +129,7 @@ contract Supplychain {
 
         // find index of _predecessorProductId in successor's predecessors
         for (uint i = 0; i < successor.Get_Predecessor_Count(); i++) {
-            if (successor.predecessorIds(i) == _predecessorProductId) {
+            if (successor.Get_Predecessors()[i] == _predecessorProductId) {
                 successorIndex = i;
                 break;
             }

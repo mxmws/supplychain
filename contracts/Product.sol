@@ -45,6 +45,18 @@ contract Product is Ownable{
         instance.SuccessorIds = new_successorIds;
     }
 
+    function Set_SuccessorCandadiateIds(address[] calldata new_successorIds) public onlyOwner{
+       for(uint i = 0; i < new_successorIds.length; i++){
+            instance.PredecessorIdIsHandshakeCandidate[new_successorIds[i]] = true;
+        }
+    }
+
+    function Set_PredecessorCandidateIds(address[] calldata new_predecessorIds) public onlyOwner{
+        for(uint i = 0; i < new_predecessorIds.length; i++){
+            instance.PredecessorIdIsHandshakeCandidate[new_predecessorIds[i]] = true;
+        }
+    }
+
     function Set_PredecessorIds(address[] calldata new_predecessorIds) public onlyOwner{
         instance.SuccessorIds = new_predecessorIds;
     }
@@ -87,6 +99,18 @@ contract Product is Ownable{
 
     function Get_IpfsAddress() external view returns(string memory){
         return instance.Ipfs_Address;
+    }
+
+    function Get_Name() external view returns (string memory){
+        return instance.Name;
+    }
+
+    function Get_IsValue() external view returns(bool){
+        return instance.IsValue;
+    }
+
+    function Get_CarbonFootprint() external  view returns(uint){
+        return instance.CarbonFootprint;
     }
     // endregion getter functions
 
