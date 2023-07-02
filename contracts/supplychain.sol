@@ -6,17 +6,12 @@ import "./Label.sol";
 import "./Ownable.sol";
 import "./Label.sol";
 
-contract Supplychain is Ownable {
+contract Supplychain {
     
     string public name;
 
     mapping (address => Product) products;
     mapping (address => Label) labels;
-
-
-    constructor (string memory _name) Ownable() {
-        name=_name;
-    }
 
     event ProductAdded(
         address indexed _user,
@@ -42,11 +37,28 @@ contract Supplychain is Ownable {
         address _successorProductId
     );
 
-    // this function shouldn't cost gas (not sure why it says infinite)
-    function getProduct(address _id) public view returns(Product){
-        // require(labels[_id].GetOwner() != address(0), "Product doesn't exist");
-        Product myProduct = products[_id];
-        return myProduct;
+    event ProductCreated(
+        address indexed productAddress
+    );
+
+
+    function getProduct(address _id) public view returns (
+        string memory _name,
+        uint carbonFootprint,
+        string memory swarmStorageAddress,
+        address[] memory _labels,
+        address[] memory predecessors,
+        address[] memory successors
+    ) {
+        Product p = products[_id];
+        return (
+            p.name(),
+            p.carbonFootprint(),
+            p.swarm_storage_address(),
+            p.Get_LabelIDs(),
+            p.Get_Predecessors(),
+            p.Get_Successors()
+        );
     }
     
     function addLabel(address _id, string memory _name, uint _productId) public {
@@ -56,49 +68,45 @@ contract Supplychain is Ownable {
         emit LabelAdded(msg.sender, _id, _name);
     }
 
-    function addProduct(address _address, string memory _name, address[] memory _successors, address[] memory _predecessors, uint _carbonFootprint) public {
-        require(products[_address].owner() != address(0), "Product with this ID already exists");
-
-        // this is probably not the best way to do it but can't use constructor because struct contains mappings
+    function addProduct(
+        string memory _name,
+        uint _carbonFootprint,
+        address[] memory _labelIDs,
+        address[] memory _successors,
+        address[] memory _predecessors,
+        string memory _ipfsAddress
+    ) public returns (address) {
         Product prod = new Product(_name, _carbonFootprint);
         prod.Set_SuccessorIds(_successors);
         prod.Set_PredecessorIds(_predecessors);
         prod.Set_CarbonFootPrint(_carbonFootprint);
+        prod.Set_LabelIds(_labelIDs);
+        prod.Set_IPFS(_ipfsAddress);
 
-        // ToDo: Handshake
-        emit ProductAdded(msg.sender, _address, _name); // event will be on the blockchain forever
+        products[address(prod)] = prod;
+
+        emit ProductCreated(address(prod));
+
+        return address(prod);
     }
 
-    function addLink(address _predecessorProductId, address _successorProductId) public  {
-        // ToDo: Handshake / checking ownership
-        //1. check product in othter contract if self was added as candidate   
-            //no: enter other address into respective candidate mapping
-            //return
-        //2. yes: delete self in other candidate mapping
-        //3. update own successor/predecessor mapping
-        //4. update other successor/predecessor mapping
-            //--> how to handle ownership and stop attackers from deleting random products
-        
-        // ToDo: make sure link doesn't exist yet
-        
-
-        // check if both products exist
-        Product predecessor = products[_predecessorProductId]; 
-        Product successor = products[_successorProductId];
-        require(predecessor.isValue() && successor.isValue(), "One or both products don't exist");
-
-        if(predecessor.Do_Handshake_To_Successor(_successorProductId)){
-            //handshake successfull, predecessor_candidate of successor was removed (set to false)
-        }
-        else{
-            successor.Do_Handshake_To_Predecessor(_predecessorProductId);
+    function addLink(address _predecessorProduct, address _successorProduct) public returns(bool handshake_complete)  {
+        Product predecessor = products[_predecessorProduct]; 
+        if(msg.sender == predecessor.owner())
+        {
+            return predecessor.Do_Handshake_To_Successor(_successorProduct);
         }
 
-        emit LinkAdded(msg.sender, _predecessorProductId, _successorProductId);
+        Product successor = products[_successorProduct];
+        if(msg.sender == successor.owner()){
+             return successor.Do_Handshake_To_Predecessor(_predecessorProduct);
+        }
+
+        //throw errer
+        require(false, "Message sender is not the owner of either product");
     }
 
     function removeLink(address _predecessorProductId, address _successorProductId) public {
-        // Todo: Problem: searching an array can be very expensive
         // check if both products exist
         require(products[_predecessorProductId].isValue() && products[_successorProductId].isValue(), "One or both products don't exist");
 
@@ -125,10 +133,6 @@ contract Supplychain is Ownable {
                 break;
             }
         }
-
-        // remove the links
-        // delete products[_predecessorProductId].successorIds[predecessorIndex];
-        // delete products[_successorProductId].predecessorIds[successorIndex];
 
         emit LinkRemoved(msg.sender, _predecessorProductId, _successorProductId);
     }

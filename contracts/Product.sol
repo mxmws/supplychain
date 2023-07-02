@@ -4,95 +4,122 @@ pragma solidity 0.8.18;
 import "./Ownable.sol";
 
 contract Product is Ownable{
+
+    struct Instance{
+        bool IsValue;
+        string Name;
+        mapping(address => bool) SuccessorIdIsHandshakeCandidate;
+        mapping(address => bool) PredecessorIdIsHandshakeCandidate;
+
+        mapping(uint => uint) SuccessorIdToArrayIndex;
+        mapping(uint => uint) PredecessorIdToArrayIndex;
+
+        address[] SuccessorIds; 
+        address[] PredecessorIds;
+
+        address[] LabelIds;
+
+        string Ipfs_Address;
+
+        uint CarbonFootprint;
+
+        string Swarm_storage_address;
+    }
     
-    bool public isValue  = false;
-    string public name;
-    mapping(address => bool) public successorIdIsHandshakeCandidate;
-    mapping(address => bool) public predecessorIdIsHandshakeCandidate;
+    mapping(uint256 => Instance) public products;
+    mapping(address => uint256[]) public userProducts;
 
-    mapping(uint => uint) public successorIdToArrayIndex;
-    mapping(uint => uint) public predecessorIdToArrayIndex;
+    Instance instance;
 
-    address[] public successorIds; 
-    address[] public predecessorIds;
-
-    address[] public labelIds;
-
-    uint public carbonFootprint;
-
-    string public swarm_storage_address;
-    
     constructor(string memory _name, uint _carbonFootprint) Ownable() {
-        name = _name;
-        carbonFootprint = _carbonFootprint;
-        isValue= true;
+        instance.Name = _name;
+        instance.CarbonFootprint = _carbonFootprint;
+        instance.IsValue= true;
     }
     //region setter functions
     function Set_Name(string calldata new_name) public onlyOwner{
-        name = new_name;
+        instance.Name = new_name;
     }
 
     function Set_SuccessorIds(address[] calldata new_successorIds) public onlyOwner{
-        successorIds = new_successorIds;
+        instance.SuccessorIds = new_successorIds;
     }
 
     function Set_PredecessorIds(address[] calldata new_predecessorIds) public onlyOwner{
-        successorIds = new_predecessorIds;
+        instance.SuccessorIds = new_predecessorIds;
     }
 
     function Set_LabelIds(address[] calldata new_LabelIds) public onlyOwner{
-        successorIds = new_LabelIds;
+        instance.SuccessorIds = new_LabelIds;
     }
 
     function Set_CarbonFootPrint(uint new_CarbonFootprint) public onlyOwner{
-        carbonFootprint = new_CarbonFootprint;
+        instance.CarbonFootprint = new_CarbonFootprint;
     }
 
     function Set_IsValue(bool value) public onlyOwner{
-        isValue = value;
+        instance.IsValue = value;
+    }
+
+    function Set_IPFS(string calldata _ipfsAddress) public onlyOwner{
+        instance.Ipfs_Address = _ipfsAddress;
     }
     //endregion setter functions
 
     //region getter functios
     function Get_Successor_Count() external view returns(uint256){
-        return successorIds.length;
+        return instance.SuccessorIds.length;
     }
 
     function Get_Predecessor_Count() external view returns(uint256){
-        return predecessorIds.length;
+        return instance.PredecessorIds.length;
+    }
+
+    function Get_Predecessors() external view returns(address[] memory){
+        return instance.PredecessorIds;
+    }
+    function Get_Successors() external view returns(address[] memory){
+        return instance.SuccessorIds;
+    }
+    function Get_LabelIDs() external view returns(address[] memory){
+        return instance.LabelIds;
+    }
+
+    function Get_IpfsAddress() external view returns(string memory){
+        return instance.Ipfs_Address;
     }
     // endregion getter functions
 
     //region hand shake
-    function Has_SuccessorCandidate(address successorAddress) public view returns(bool){
-        return successorIdIsHandshakeCandidate[successorAddress];
+    function Has_SuccessorCandidate(address successorAddress) external view returns(bool){
+        return instance.SuccessorIdIsHandshakeCandidate[successorAddress];
     }
 
     function Has_PredecessorCandidate(address predecessorAddress) public view returns(bool){
-        return successorIdIsHandshakeCandidate[predecessorAddress];
+        return instance.SuccessorIdIsHandshakeCandidate[predecessorAddress];
     }
     
     function Accept_SuccessorCandidate() external {
-        require(successorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for successorship.");
-        successorIdIsHandshakeCandidate[msg.sender] = false;
+        require(instance.SuccessorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for successorship.");
+        instance.SuccessorIdIsHandshakeCandidate[msg.sender] = false;
 
     }
 
     function Accept_PredecessorCandidate() external {
-        require(predecessorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for predecessorship.");
-        predecessorIdIsHandshakeCandidate[msg.sender] = false;
+        require(instance.PredecessorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for predecessorship.");
+        instance.PredecessorIdIsHandshakeCandidate[msg.sender] = false;
     }
 
     function Do_Handshake_To_Successor(address successor_address) public returns(bool){
         Product successor = Product(successor_address);
 
         if(successor.Has_PredecessorCandidate(address(this))){
-            successorIds.push(successor_address);
+            instance.SuccessorIds.push(successor_address);
             successor.Accept_PredecessorCandidate();
             return true;
         }
         else{
-            successorIdIsHandshakeCandidate[successor_address] = true;
+            instance.SuccessorIdIsHandshakeCandidate[successor_address] = true;
             return false;
         }
     }
@@ -101,15 +128,15 @@ contract Product is Ownable{
         Product predecessor = Product(predecessor_address);
 
         if(predecessor.Has_PredecessorCandidate(address(this))){
-            predecessorIds.push(predecessor_address);
+            instance.PredecessorIds.push(predecessor_address);
             predecessor.Accept_SuccessorCandidate();
 
             return true;
         }
         else{
-            predecessorIdIsHandshakeCandidate[predecessor_address];
+            instance.PredecessorIdIsHandshakeCandidate[predecessor_address];
             return false;
         }
     }
-    //endregion hand shake
+    //endregion handshake
 }

@@ -88,6 +88,32 @@
 			},
 			{
 				"inputs": [],
+				"name": "Get_IpfsAddress",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_LabelIDs",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "Get_Predecessor_Count",
 				"outputs": [
 					{
@@ -101,12 +127,38 @@
 			},
 			{
 				"inputs": [],
+				"name": "Get_Predecessors",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "Get_Successor_Count",
 				"outputs": [
 					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_Successors",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
 					}
 				],
 				"stateMutability": "view",
@@ -159,6 +211,19 @@
 					}
 				],
 				"name": "Set_CarbonFootPrint",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_ipfsAddress",
+						"type": "string"
+					}
+				],
+				"name": "Set_IPFS",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -230,64 +295,6 @@
 			},
 			{
 				"inputs": [],
-				"name": "carbonFootprint",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "isValue",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "labelIds",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
@@ -302,125 +309,61 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
+						"internalType": "uint256",
 						"name": "",
-						"type": "address"
+						"type": "uint256"
 					}
 				],
-				"name": "predecessorIdIsHandshakeCandidate",
+				"name": "products",
 				"outputs": [
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "IsValue",
 						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "predecessorIdToArrayIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "predecessorIds",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "successorIdIsHandshakeCandidate",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "successorIdToArrayIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "successorIds",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "swarm_storage_address",
-				"outputs": [
+					},
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "Name",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "Ipfs_Address",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "CarbonFootprint",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "Swarm_storage_address",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "userProducts",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -463,11 +406,11 @@
 			]
 		},
 		"contracts/Product.sol": {
-			"keccak256": "0x700f80c0a1b29a48347f4e01def2242265288bbe298af48e39101484a071fb43",
+			"keccak256": "0x89778bc108927c017f6e355687d42b0ef196b1bc6deed2e5ca56f87e4a5e35c7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://112725714bbb592cce001044e02e5da9d3a5da59f9353aba95b57ef84412ca05",
-				"dweb:/ipfs/QmdNzVgfPEFqDJWPcLNkA7GjAJYwnGKwvn3nQdd2fkuEpB"
+				"bzz-raw://df5a3d98e2a8a9ecb89894e0242074a18e272c3f7b4a114f7677415e3ee69eb9",
+				"dweb:/ipfs/QmeP1JrojH1SegByCbgFtHDBcG8JoWHgYrV1W6vm4FLWjT"
 			]
 		}
 	},

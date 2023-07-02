@@ -6,17 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -117,17 +106,17 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
 				"inputs": [
 					{
+						"indexed": true,
 						"internalType": "address",
-						"name": "newOwner",
+						"name": "productAddress",
 						"type": "address"
 					}
 				],
-				"name": "ChangeOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
+				"name": "ProductCreated",
+				"type": "event"
 			},
 			{
 				"inputs": [
@@ -156,31 +145,42 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_predecessorProductId",
+						"name": "_predecessorProduct",
 						"type": "address"
 					},
 					{
 						"internalType": "address",
-						"name": "_successorProductId",
+						"name": "_successorProduct",
 						"type": "address"
 					}
 				],
 				"name": "addLink",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "handshake_complete",
+						"type": "bool"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "_address",
-						"type": "address"
-					},
-					{
 						"internalType": "string",
 						"name": "_name",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_carbonFootprint",
+						"type": "uint256"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_labelIDs",
+						"type": "address[]"
 					},
 					{
 						"internalType": "address[]",
@@ -193,13 +193,19 @@
 						"type": "address[]"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_carbonFootprint",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "_ipfsAddress",
+						"type": "string"
 					}
 				],
 				"name": "addProduct",
-				"outputs": [],
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -214,9 +220,34 @@
 				"name": "getProduct",
 				"outputs": [
 					{
-						"internalType": "contract Product",
-						"name": "",
-						"type": "address"
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "carbonFootprint",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "swarmStorageAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "address[]",
+						"name": "_labels",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "predecessors",
+						"type": "address[]"
+					},
+					{
+						"internalType": "address[]",
+						"name": "successors",
+						"type": "address[]"
 					}
 				],
 				"stateMutability": "view",
@@ -224,12 +255,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "owner",
+				"name": "name",
 				"outputs": [
 					{
-						"internalType": "address",
+						"internalType": "string",
 						"name": "",
-						"type": "address"
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -282,11 +313,11 @@
 	},
 	"sources": {
 		"contracts/Label.sol": {
-			"keccak256": "0x3813415c3cbcc60342e3b30f8ad23ddfe49f32f76461047ae66223b652e090ce",
+			"keccak256": "0x6145699cba8d17d40475a973b31ae2e150130fbc6aec3e4d39c90759f8fc07c0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://25550c2b00406bfb9ec236f82225bec0fc78e93d02ba6f7fe6ec1d298690fd16",
-				"dweb:/ipfs/QmcF2MTmVu1rDscbgnocQTGVTQ6UVX9v6rF2mL48xVJ6Bh"
+				"bzz-raw://f0b85b75b1915ccfaa4bd91690df1fba4e658c51a3690516622a25fc047c14f1",
+				"dweb:/ipfs/QmaRwFb65Ga2sKiMDoxMYx2JLEzhX5jKZnipxgcWesTLZ6"
 			]
 		},
 		"contracts/Ownable.sol": {
@@ -298,19 +329,19 @@
 			]
 		},
 		"contracts/Product.sol": {
-			"keccak256": "0x700f80c0a1b29a48347f4e01def2242265288bbe298af48e39101484a071fb43",
+			"keccak256": "0x6d6b3194e2bb1c4c7e2c1f077a21e13d6e6be1acbbc7a10a1cfeac78948452fd",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://112725714bbb592cce001044e02e5da9d3a5da59f9353aba95b57ef84412ca05",
-				"dweb:/ipfs/QmdNzVgfPEFqDJWPcLNkA7GjAJYwnGKwvn3nQdd2fkuEpB"
+				"bzz-raw://484b4fec7cdd148dc9aef6095f7079532ed2ff8931ddf42e706195ad53e7af0a",
+				"dweb:/ipfs/QmUDyh9vuvYgPFLdxxbcpHCcaxTqTX7Gu5xdmPo84TNWPB"
 			]
 		},
 		"contracts/supplychain.sol": {
-			"keccak256": "0x820745781af49037ff60f42466d846e05944a6ea9c883e3ad7b1692e6e5ea7e7",
+			"keccak256": "0x21d9e13087716e5166bcfccde9b434fcf868fc3a8274b681b48080745dfd0bde",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://98ac53134164881b492280a2742f6d5ca004ce4d648c0fddd86c607f0f0eaedc",
-				"dweb:/ipfs/QmeazjD2XBZocJC6MQ99uZjADCFKPypX274FZMigrWZDYb"
+				"bzz-raw://ad5dfd4b7d065f73979214b702efc6736032bb21e7b31d282a53452e2739bad0",
+				"dweb:/ipfs/QmaYd6c6wYTXr3Et8ieAfMhaFj4q5LBDyCWbSJuVmBCuPX"
 			]
 		}
 	},
