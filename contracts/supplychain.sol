@@ -8,18 +8,12 @@ import "./Label.sol";
 
 contract Supplychain {
      
-    string public name;
-
     mapping (address => Product) products;
     mapping (address => Label) labels;
 
-    event ProductAdded(
-        address indexed _user,
-        address _id,
-        string _name
-    );
 
-    event LabelAdded (
+    event ContractAdded(
+        string ContractType,
         address indexed _user,
         address _id,
         string _name
@@ -65,7 +59,7 @@ contract Supplychain {
         require(!labels[_id].IsValue(), "Label with this ID already exists");
         labels[_id] = new Label(_name, _productId);
         // ToDo: Handshake
-        emit LabelAdded(msg.sender, _id, _name);
+        emit ContractAdded("Label", msg.sender, _id, _name);
     }
 
     function addProduct(
@@ -124,32 +118,23 @@ contract Supplychain {
     function removeLink(address _predecessorProductId, address _successorProductId) public {
         // check if both products exist
         require(products[_predecessorProductId].Get_IsValue() && products[_successorProductId].Get_IsValue(), "One or both products don't exist");
-
         // get products
         Product predecessor = products[_predecessorProductId];
         Product successor = products[_successorProductId];
 
+        require(msg.sender == predecessor.Get_Owner() || msg.sender == successor.Get_Owner(), "Links can only be removed by either of the owners");
         // remove links from products
-        uint predecessorIndex;
-        uint successorIndex;
-
-        // find index of _successorProductId in predecessor's successors
-        for (uint i = 0; i < predecessor.Get_Successor_Count(); i++) {
-            if (predecessor.Get_Successors()[i] == _successorProductId) {
-                predecessorIndex = i;
-                break;
-            }
-        }
-
-        // find index of _predecessorProductId in successor's predecessors
-        for (uint i = 0; i < successor.Get_Predecessor_Count(); i++) {
-            if (successor.Get_Predecessors()[i] == _predecessorProductId) {
-                successorIndex = i;
-                break;
-            }
-        }
+        predecessor.Remove_Successor(_successorProductId);
+        successor.Remove_Predecessor(_predecessorProductId);
 
         emit LinkRemoved(msg.sender, _predecessorProductId, _successorProductId);
     }
 
+    //CONTRACT BECOMES TOO LARGE IF ANOTHER METHOD IS ADDDED 
+
+    // function Change_Name(string calldata name, address productId) public {
+    //     Product product = products[productId];
+    //     require(msg.sender == product.Get_Owner(), "Sender is not the owner of this product" );
+    //      product.Set_Name(name);
+    //  }
 }

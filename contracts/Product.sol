@@ -54,6 +54,11 @@ contract Product is Ownable{
     function Set_Name(string calldata new_name) public onlyOwner{
         instance.Name = new_name;
     }
+    //SUPPLYCHAIN CONTRACT BECOMES TOO BIG IF THIS WAY OF OWNERSHIP TEST GETS IMPLEMENTED:
+    // function Set_Name(string calldata new_name, address _owner) public onlyOwner{
+    //     require(instance.Owner == _owner, "Sender is not the owner of this product" );
+    //     instance.Name = new_name;
+    // }
 
     function Set_SuccessorIds(address[] calldata new_successorIds) public onlyOwner{
         instance.SuccessorIds = new_successorIds;
@@ -190,4 +195,25 @@ contract Product is Ownable{
         }
     }
     //endregion handshake
+
+    //region delete predecessors / successors
+    function Remove_Predecessor(address _predecessor) public onlyOwner{
+        for (uint i = 0; i < instance.PredecessorIds.length; i++) {
+            if (instance.PredecessorIds[i] == _predecessor) {
+                delete instance.PredecessorIds[i];
+                break;
+            }
+        }
+    }
+
+    function Remove_Successor(address _successor) public onlyOwner{
+        for (uint i = 0; i < instance.SuccessorIds.length; i++) {
+            if (instance.SuccessorIds[i] == _successor) {
+                delete instance.SuccessorIds[i];
+                break;
+            }
+        }
+    }
+    //endregion delete predecessors / successors
+
 }
