@@ -7,7 +7,7 @@ import "./Ownable.sol";
 import "./Label.sol";
 
 contract Supplychain {
-    
+     
     string public name;
 
     mapping (address => Product) products;
@@ -76,7 +76,7 @@ contract Supplychain {
         address[] memory _predecessors,
         string memory _ipfsAddress
     ) public returns (address) {
-        Product prod = new Product(_name, _carbonFootprint);
+        Product prod = new Product(_name, _carbonFootprint, msg.sender);
 
         prod.Set_SuccessorCandadiateIds(_successors);
         prod.Set_PredecessorCandidateIds(_predecessors);
@@ -91,20 +91,34 @@ contract Supplychain {
         return address(prod);
     }
 
+    event CheckpointReached(
+        string name,
+        uint16 line
+    );
+
     function addLink(address _predecessorProduct, address _successorProduct) public returns(bool handshake_complete)  {
+
         Product predecessor = products[_predecessorProduct]; 
-        if(msg.sender == predecessor.owner())
-        {
-            return predecessor.Do_Handshake_To_Successor(_successorProduct);
-        }
-
         Product successor = products[_successorProduct];
-        if(msg.sender == successor.owner()){
-             return successor.Do_Handshake_To_Predecessor(_predecessorProduct);
+
+        if(msg.sender == predecessor.Get_Owner())
+        {
+            bool success = predecessor.Do_Handshake_To_Successor(_successorProduct);            
+        
+            if(predecessor.Get_Owner() != successor.Get_Owner())
+            return success;
         }
 
-        //throw errer
-        require(false, "Message sender is not the owner of either product");
+        if(msg.sender == successor.Get_Owner())
+        {
+            bool success =  successor.Do_Handshake_To_Predecessor(_predecessorProduct);
+            
+            return success;
+        }
+        else{
+            //throw 
+            require(false, "Message sender is not the owner of either product");
+        }
     }
 
     function removeLink(address _predecessorProductId, address _successorProductId) public {

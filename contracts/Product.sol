@@ -6,6 +6,7 @@ import "./Ownable.sol";
 contract Product is Ownable{
 
     struct Instance{
+        address Owner;
         bool IsValue;
         string Name;
         mapping(address => bool) SuccessorIdIsHandshakeCandidate;
@@ -31,10 +32,23 @@ contract Product is Ownable{
 
     Instance instance;
 
-    constructor(string memory _name, uint _carbonFootprint) Ownable() {
+    event ProductCreated(
+        address indexed productAddress
+    );
+
+    event HandShakeDone(
+        string Name,
+        bool Successful
+    );
+
+    constructor(string memory _name, uint _carbonFootprint, address _owner) {
+        instance.Owner = _owner;
         instance.Name = _name;
         instance.CarbonFootprint = _carbonFootprint;
         instance.IsValue= true;
+
+        emit ProductCreated(address(this));
+
     }
     //region setter functions
     function Set_Name(string calldata new_name) public onlyOwner{
@@ -112,10 +126,14 @@ contract Product is Ownable{
     function Get_CarbonFootprint() external  view returns(uint){
         return instance.CarbonFootprint;
     }
+
+    function Get_Owner() external view returns(address owner){
+        return instance.Owner;
+    }
     // endregion getter functions
 
     //region hand shake
-    function Has_SuccessorCandidate(address successorAddress) external view returns(bool){
+    function Has_SuccessorCandidate(address successorAddress) public view returns(bool){
         return instance.SuccessorIdIsHandshakeCandidate[successorAddress];
     }
 
@@ -123,15 +141,17 @@ contract Product is Ownable{
         return instance.SuccessorIdIsHandshakeCandidate[predecessorAddress];
     }
     
-    function Accept_SuccessorCandidate() external {
+    function Accept_SuccessorCandidate() public {
         require(instance.SuccessorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for successorship.");
         instance.SuccessorIdIsHandshakeCandidate[msg.sender] = false;
+        instance.SuccessorIds.push(msg.sender);
 
     }
 
-    function Accept_PredecessorCandidate() external {
+    function Accept_PredecessorCandidate() public {
         require(instance.PredecessorIdIsHandshakeCandidate[msg.sender] == true, "Requestor is not a candidate for predecessorship.");
         instance.PredecessorIdIsHandshakeCandidate[msg.sender] = false;
+        instance.PredecessorIds.push(msg.sender);
     }
 
     function Do_Handshake_To_Successor(address successor_address) public returns(bool){
@@ -140,10 +160,14 @@ contract Product is Ownable{
         if(successor.Has_PredecessorCandidate(address(this))){
             instance.SuccessorIds.push(successor_address);
             successor.Accept_PredecessorCandidate();
+            
+            emit HandShakeDone("Successor", true);
             return true;
         }
         else{
-            instance.SuccessorIdIsHandshakeCandidate[successor_address] = true;
+            instance.SuccessorIdIsHandshakeCandidate[successor_address] = true;            
+            
+            emit HandShakeDone("Successor", false);
             return false;
         }
     }
@@ -154,11 +178,14 @@ contract Product is Ownable{
         if(predecessor.Has_PredecessorCandidate(address(this))){
             instance.PredecessorIds.push(predecessor_address);
             predecessor.Accept_SuccessorCandidate();
-
+            
+            emit HandShakeDone("Predecessor", true);
             return true;
         }
         else{
             instance.PredecessorIdIsHandshakeCandidate[predecessor_address];
+            
+            emit HandShakeDone("Predecessor", false);
             return false;
         }
     }

@@ -16,10 +16,47 @@
 						"internalType": "uint256",
 						"name": "_carbonFootprint",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "Name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "Successful",
+						"type": "bool"
+					}
+				],
+				"name": "HandShakeDone",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "productAddress",
+						"type": "address"
+					}
+				],
+				"name": "ProductCreated",
+				"type": "event"
 			},
 			{
 				"inputs": [],
@@ -146,6 +183,19 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_Owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -382,6 +432,11 @@
 				"name": "products",
 				"outputs": [
 					{
+						"internalType": "address",
+						"name": "Owner",
+						"type": "address"
+					},
+					{
 						"internalType": "bool",
 						"name": "IsValue",
 						"type": "bool"
@@ -471,11 +526,11 @@
 			]
 		},
 		"contracts/Product.sol": {
-			"keccak256": "0x6265c76c75f485b478d08d60a2555f69c14d6840e4d11a48d9126831a6b64592",
+			"keccak256": "0x0cc7f401466499b5c8330065c13404fd3e24beb8613792ac80c63be918b2d6ff",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9488454b994f3dd3cf30282845bf862b81f75f23d99bd7b7ce083d2849e9dce8",
-				"dweb:/ipfs/QmPGGasbkFc5RAyyARZvYFRnXHHRJto2ym5auCJF75Cksv"
+				"bzz-raw://1b56ea055aa939e6055675f799b2f4bea477c68cd9da879bcfd75884fad72480",
+				"dweb:/ipfs/QmfSnzNQvbg8pkZzBfZYMvsCP3mKr7ChcrARTKTsx6MRys"
 			]
 		}
 	},

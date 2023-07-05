@@ -4,27 +4,27 @@ pragma solidity 0.8.18;
 import "./Product.sol";
 
 contract Label is Ownable{
-    struct Data {
+    struct Instance {
         bool isValue;
         string name;
         uint productId;
     }
 
-    Data public data;
+    Instance public instance;
 
     constructor(string memory name, uint productId) Ownable(){
-        data = Data(true, name, productId);
+        instance = Instance(true, name, productId);
     }
 
     function IsValue() public view returns(bool){
-        return data.isValue;
+        return instance.isValue;
     }
 
     function Name() public view returns(string memory){
-        return data.name;
+        return instance.name;
     }
 
     function ProdcutId() public view returns(uint){
-        return data.productId;
+        return instance.productId;
     }
 }
