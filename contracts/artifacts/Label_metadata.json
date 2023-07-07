@@ -9,17 +9,49 @@
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "name",
+						"name": "_name",
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "productId",
-						"type": "uint256"
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Accept_Candidate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "Candidates",
+				"outputs": [
+					{
+						"internalType": "enum relation",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -32,6 +64,128 @@
 				"name": "ChangeOwnership",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "Delete_Id",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "Address",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Do_Handshake",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Get_Ids",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_Owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "candidateAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Has_Candidate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "Ids",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -61,16 +215,29 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "ProdcutId",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "_ipfsAddress",
+						"type": "string"
 					}
 				],
-				"stateMutability": "view",
+				"name": "Set_IPFS",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address[]",
+						"name": "new_ProductIds",
+						"type": "address[]"
+					}
+				],
+				"name": "Set_ProductIds",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -78,19 +245,24 @@
 				"name": "instance",
 				"outputs": [
 					{
+						"internalType": "address",
+						"name": "Owner",
+						"type": "address"
+					},
+					{
 						"internalType": "bool",
-						"name": "isValue",
+						"name": "IsValue",
 						"type": "bool"
 					},
 					{
 						"internalType": "string",
-						"name": "name",
+						"name": "Name",
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "productId",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "Ipfs_Address",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -107,6 +279,25 @@
 					}
 				],
 				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "reverseRelation",
+				"outputs": [
+					{
+						"internalType": "enum relation",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "pure",
 				"type": "function"
 			}
 		],
@@ -137,12 +328,20 @@
 		"remappings": []
 	},
 	"sources": {
+		"contracts/Handshaker.sol": {
+			"keccak256": "0x79172265e402c8f6f86824ad504a50c21cd2544c664ce2170222783326d94de9",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://2613fa919ae8114eb8978e0d5eef026a89d71bd5381f626867f956300356caa7",
+				"dweb:/ipfs/QmRinpGWtZP7bq6Q6wMrK3rZ5MF4BkZ2Gtioi6d7vXXpSX"
+			]
+		},
 		"contracts/Label.sol": {
-			"keccak256": "0x7a235edcb87ee70f056e88d6ea6820191d17c581997340225b66cfdba5fe9dd0",
+			"keccak256": "0x3b379e54041196297d343f98417e6d3d52e1873de7339cbbdcd173094400b73e",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://b3051a9683a423bdb55e9ef672a2506c3b14f0cc93fb36c07a521305f1a94f42",
-				"dweb:/ipfs/QmemizRaVmv8oVoC9nrq8CfWQitQfrxT1uSjj9fg7YjX8f"
+				"bzz-raw://d649477f87eed9a6137eb983f005fa2db1fc02455c9146e1a4627f5d86015c3c",
+				"dweb:/ipfs/Qmaua8J5bZBmfQY2vRAJpKjy3dneDQYB78uoJfsPL4ocAY"
 			]
 		},
 		"contracts/Ownable.sol": {
@@ -151,14 +350,6 @@
 			"urls": [
 				"bzz-raw://3d5a0e925546a5f5d969d37aac7092e58470562632e311c43d5fd6fce94af475",
 				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
-			]
-		},
-		"contracts/Product.sol": {
-			"keccak256": "0x6265c76c75f485b478d08d60a2555f69c14d6840e4d11a48d9126831a6b64592",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://9488454b994f3dd3cf30282845bf862b81f75f23d99bd7b7ce083d2849e9dce8",
-				"dweb:/ipfs/QmPGGasbkFc5RAyyARZvYFRnXHHRJto2ym5auCJF75Cksv"
 			]
 		}
 	},

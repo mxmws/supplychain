@@ -21,12 +21,18 @@ contract Handshaker is Ownable{
     mapping(address => relation) public Candidates;
     mapping(relation => address[]) public Ids;
 
-    
     function Get_Owner() external view returns(address owner){
         return Owner;
     }
 
-    
+    function Get_Ids(relation r) external view returns(address[] memory){
+        return Ids[r];
+    }
+
+    function Add_Candidate(address addr, relation r) external{
+            Candidates[addr] = r;
+    }
+
     // region handshake
     function Has_Candidate(address candidateAddress, relation r) public view returns(bool){
         return Candidates[candidateAddress] == r;
@@ -52,6 +58,10 @@ contract Handshaker is Ownable{
             
             return false;
         }
+    }
+
+    function Delete_Id(relation r, uint index) public {
+        delete Ids[r][index];
     }
 
     // end region handshake

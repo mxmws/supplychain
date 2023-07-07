@@ -1,0 +1,140 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "contract Handshaker",
+						"name": "firstContract",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r1",
+						"type": "uint8"
+					},
+					{
+						"internalType": "contract Handshaker",
+						"name": "secondContract",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r2",
+						"type": "uint8"
+					}
+				],
+				"name": "addLink",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "handshake_complete",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "contract Handshaker",
+						"name": "firstContract",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r1",
+						"type": "uint8"
+					},
+					{
+						"internalType": "contract Handshaker",
+						"name": "secondContract",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r2",
+						"type": "uint8"
+					}
+				],
+				"name": "removeLink",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Linker.sol": "Linker"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Handshaker.sol": {
+			"keccak256": "0x79172265e402c8f6f86824ad504a50c21cd2544c664ce2170222783326d94de9",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://2613fa919ae8114eb8978e0d5eef026a89d71bd5381f626867f956300356caa7",
+				"dweb:/ipfs/QmRinpGWtZP7bq6Q6wMrK3rZ5MF4BkZ2Gtioi6d7vXXpSX"
+			]
+		},
+		"contracts/Label.sol": {
+			"keccak256": "0x5fd2c8643de1f02cda42afeeb60cbb630ab21eeeb90d153d3aa2f2f599e5e095",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://e6a52537b63e10bc43bc284c7922fd76cbb44033ae41ce8f10064d47e03dc97d",
+				"dweb:/ipfs/QmNrfQD5tkmToguaWWnmQsRWkvHBtWFFuLPpgmYfvGpnSs"
+			]
+		},
+		"contracts/Linker.sol": {
+			"keccak256": "0xaf2a03fad3744b1b8849c82cf726e905a164661b6bab03aed924f0d62745857a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://86665aa74d4d5100eeb18e3e683b4323870e78628fc4f887d64f4710d638cdac",
+				"dweb:/ipfs/QmWGDfAiWRNwPFcfwQ9Jj6seYoAs1sDtTpUMjrVBaDetS7"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://3d5a0e925546a5f5d969d37aac7092e58470562632e311c43d5fd6fce94af475",
+				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
+			]
+		},
+		"contracts/Product.sol": {
+			"keccak256": "0x74a58a87d95801e5f201ec5a913c06ef0c073b4a8ef40fe931c3bec90f60905e",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://3a311d3f871239b729b8fef353ca4c025841eb4892265f9fd2e5bf2f59aaebc1",
+				"dweb:/ipfs/QmPoA5HU185HsLphGFUSbF1A46EFkaMnQ627aTSywvyLGt"
+			]
+		}
+	},
+	"version": 1
+}
