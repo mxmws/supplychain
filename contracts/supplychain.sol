@@ -6,6 +6,13 @@ import "./Label.sol";
 
 contract Supplychain {
 
+    event ProductAdded(address product, 
+                        string name, 
+                        address[] 
+                        predecessors, 
+                        address[] succcessors, 
+                        address[] lables);
+
     mapping (address => Product) products;
     mapping (address => Label) labels;
 
@@ -78,4 +85,5 @@ contract Supplychain {
     function Get_Label(address _labelAddress) public view returns(Label){
         return labels[_labelAddress];
     }
+
 }

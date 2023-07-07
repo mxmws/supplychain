@@ -6,6 +6,44 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "firstContract",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "secondContract",
+						"type": "address"
+					}
+				],
+				"name": "ContractsLinked",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "firstContract",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "SecondContract",
+						"type": "address"
+					}
+				],
+				"name": "LinkRemoved",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
@@ -138,19 +176,19 @@
 			]
 		},
 		"contracts/Supplychain_Linker.sol": {
-			"keccak256": "0x6c5c88a4c556fe3df203cba48e1be81d92944e5172b0d83a20169258cde740af",
+			"keccak256": "0xb72f0f309b5bf68632825e92aa4ba9442bf858378717206b38bdfefa46c5b191",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://7c9e149473866c8adf239bec34d10bd3a3923c4393206e6bdbca897da83b5e0d",
-				"dweb:/ipfs/Qmey9BLdCEVBijk7piFe6Jsn6GfUJAXuJ7Qq5cPhBMuWQH"
+				"bzz-raw://e6011a8da370b9cd776743914047a8a60ba46c9dbaf1e296ac05ac7ecc6ea194",
+				"dweb:/ipfs/QmRvp1ifn8uBjiKZq4oLFmS1Cm1MaykcRjUvidcsDsrLCQ"
 			]
 		},
 		"contracts/supplychain.sol": {
-			"keccak256": "0x982880a9c212a855cef7685dd13a4c62411e7e347ae744744b54905b1c55ffe7",
+			"keccak256": "0xfd0ae70261ffec0c7c452265ba57264d15ddc9410ea5355fc2fa3c95f3cffa27",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://72e25372dec1585d4d05635d4a8bec05e5ebd8259c662bcea3505afac13273d4",
-				"dweb:/ipfs/QmSX16pgu8qum4XmNA56haHPTZLtq9dJu91dULparxnDD6"
+				"bzz-raw://0ebf73545ef1caa227bd667235f6a1c85d43dbd2c2de6c27ae0e67a309811959",
+				"dweb:/ipfs/QmUBhNouhq3jsMNHEtZdo9YnUy5QU9s3bfZ9AutFCEtMvR"
 			]
 		}
 	},

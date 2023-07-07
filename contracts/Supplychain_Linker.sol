@@ -7,6 +7,12 @@ import "./supplychain.sol";
 
 contract Supplychain_Linker {
 
+    event ContractsLinked(address firstContract,
+                          address secondContract);
+
+    event LinkRemoved(address firstContract,
+                        address SecondContract);
+
     function GetHandshakers(address _supplychainId, address firstAddress, relation r1, address secondAddress, relation r2) private view returns(Handshaker, Handshaker){
         
         require(r1 != relation.NONE && r2 != relation.NONE, "relations should not be NONE");
@@ -34,17 +40,18 @@ contract Supplychain_Linker {
         
         if(msg.sender == firstContract.Get_Owner())
         {
-            bool success = firstContract.Do_Handshake(address(secondContract), r1);            
+            bool success = firstContract.Do_Handshake(address(secondContract), r2);            
         
             if(firstContract.Get_Owner() != secondContract.Get_Owner()){
+                emit ContractsLinked(firstAddress, secondAddress);
                 return success;
             }
         }
 
         if(msg.sender == secondContract.Get_Owner())
         {
-            bool success =  secondContract.Do_Handshake(address(firstContract), r2);
-            
+            bool success =  secondContract.Do_Handshake(address(firstContract), r1);
+            emit ContractsLinked(firstAddress, secondAddress);
             return success;
         }
         else{
@@ -60,11 +67,11 @@ contract Supplychain_Linker {
         require(msg.sender == firstContract.Get_Owner() || msg.sender == secondContract.Get_Owner(), "Links can only be removed by either of the owners");
         
         // remove links from products
-        address[] memory arr = firstContract.Get_Ids(r1);
+        address[] memory arr = firstContract.Get_Ids(r2);
         uint len = arr.length;
         for (uint i = 0; i < len; i++) {
             if (arr[i] == address(secondContract)) {
-                firstContract.Delete_Id(r1, i);
+                firstContract.Delete_Id(r2, i);
                 break;
             }
         }
@@ -72,9 +79,11 @@ contract Supplychain_Linker {
         len = arr.length;
         for (uint i = 0; i < len; i++) {
             if (arr[i] == address(firstContract)) {                
-                secondContract.Delete_Id(r2, i);
+                secondContract.Delete_Id(r1, i);
                 break;
             }
         }
+
+        emit LinkRemoved(firstAddress, secondAddress);
     }
 }
