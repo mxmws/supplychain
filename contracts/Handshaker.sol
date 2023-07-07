@@ -44,16 +44,20 @@ contract Handshaker is Ownable{
         Ids[reverseRelation(r)].push(msg.sender);
     }
 
+    // event CandidateCreated(address Addr, relation r);
+    // event CanddidateAccepted(address Address, relation r);
     function Do_Handshake(address Address, relation r) public returns(bool){
         Handshaker handshaker = Handshaker(Address);
 
         if(handshaker.Candidates(address(this)) == reverseRelation(r)){
             Ids[r].push(Address);
+            // emit CandidateCreated(Address, r);
             handshaker.Accept_Candidate(r);
             
             return true;
         }
         else{
+            // emit CandidateCreated(Address, r);
             Candidates[Address] = r;
             
             return false;

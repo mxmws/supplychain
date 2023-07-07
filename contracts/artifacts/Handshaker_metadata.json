@@ -251,11 +251,11 @@
 	},
 	"sources": {
 		"contracts/Handshaker.sol": {
-			"keccak256": "0x842a61d584b5345632b6a76dfd54e8112eba67632e283814cd833b7dae3faa78",
+			"keccak256": "0x3b4c62dd3c2a6e1c2da9752651e836d1487fe17a6914100eb299bf79e4d92c2f",
 			"license": "GPL-3.0-or-later",
 			"urls": [
-				"bzz-raw://4b8f7cccbf091310313dc5a8d7017330e5b9e89d8f9021c907f0c035013ce695",
-				"dweb:/ipfs/QmYrzATHMg1DcvFqDKk9n3bvtjEMq4JYZRFAA6VtYqFmSh"
+				"bzz-raw://a7d2bd16b0e1a69cb634b31769cfba036519b87bc1d1accb9115c81fddab545c",
+				"dweb:/ipfs/QmQw8k7B2NTYcg58LyZbvv4mea7HGFzKqjjFFoboXRcuAX"
 			]
 		},
 		"contracts/Ownable.sol": {

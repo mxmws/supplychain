@@ -43,7 +43,10 @@ contract Supplychain {
     ) public returns (address) {
         Label label = new Label(_name, msg.sender);
 
-        label.Set_ProductIds(_ProductIDs);
+        for(uint i = 0; i < _ProductIDs.length; i++){
+            label.Add_Candidate(_ProductIDs[i], relation.PRODUCT); 
+        }        
+        
         label.Set_IPFS(_ipfsAddress);
 
         labels[address(label)] = label;
