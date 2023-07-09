@@ -27,6 +27,25 @@
 				"type": "constructor"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "address[]",
+						"name": "ids",
+						"type": "address[]"
+					}
+				],
+				"name": "AcceptedHandshake",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "enum relation",
@@ -484,11 +503,11 @@
 	},
 	"sources": {
 		"contracts/Handshaker.sol": {
-			"keccak256": "0x842a61d584b5345632b6a76dfd54e8112eba67632e283814cd833b7dae3faa78",
+			"keccak256": "0x1cbb0ef5f834255c1aea2937e6bcc65bb6d9dbe51311eac7a77db15e69962a8e",
 			"license": "GPL-3.0-or-later",
 			"urls": [
-				"bzz-raw://4b8f7cccbf091310313dc5a8d7017330e5b9e89d8f9021c907f0c035013ce695",
-				"dweb:/ipfs/QmYrzATHMg1DcvFqDKk9n3bvtjEMq4JYZRFAA6VtYqFmSh"
+				"bzz-raw://c224b709dc331dbf9ab3545b559c91735ba153d1db442d9f66fc18b9755821e5",
+				"dweb:/ipfs/QmcskzeXpYiH2RnfZ2sPHhSjgyBhRw8KGXXkcyQUKiCukG"
 			]
 		},
 		"contracts/Ownable.sol": {

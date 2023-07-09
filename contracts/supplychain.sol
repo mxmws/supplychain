@@ -35,6 +35,13 @@ contract Supplychain {
             p.Get_Successors()
         );
     }
+
+    function getLabel(address _id) public view returns (
+        string memory _name,
+        address[] memory _labels){
+        Label l = labels[_id];
+        return(l.Get_Name(), l.Get_ProductIds());
+    }
     
     function addLabel(
         string memory _name,

@@ -41,23 +41,20 @@ contract Handshaker is Ownable{
     function Accept_Candidate(relation r) public {
         require(Candidates[msg.sender] == reverseRelation(r), "Requestor is not a candidate.");
         Candidates[msg.sender] = relation.NONE;
+
         Ids[reverseRelation(r)].push(msg.sender);
     }
-
-    // event CandidateCreated(address Addr, relation r);
-    // event CanddidateAccepted(address Address, relation r);
+                                //product, LABEL
     function Do_Handshake(address Address, relation r) public returns(bool){
         Handshaker handshaker = Handshaker(Address);
-
+        //Product
         if(handshaker.Candidates(address(this)) == reverseRelation(r)){
             Ids[r].push(Address);
-            // emit CandidateCreated(Address, r);
             handshaker.Accept_Candidate(r);
             
             return true;
         }
         else{
-            // emit CandidateCreated(Address, r);
             Candidates[Address] = r;
             
             return false;
