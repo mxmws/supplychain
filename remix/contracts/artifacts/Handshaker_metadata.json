@@ -1,0 +1,271 @@
+{
+	"compiler": {
+		"version": "0.8.18+commit.87f61d96"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Accept_Candidate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Add_Candidate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "Candidates",
+				"outputs": [
+					{
+						"internalType": "enum relation",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "ChangeOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
+					}
+				],
+				"name": "Delete_Id",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "Address",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Do_Handshake",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Get_Ids",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_Owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "candidateAddress",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Has_Candidate",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "Ids",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "reverseRelation",
+				"outputs": [
+					{
+						"internalType": "enum relation",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/Handshaker.sol": "Handshaker"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/Handshaker.sol": {
+			"keccak256": "0x5721e60a7f34b1f9c6775d2a807d94460e3dace565afb2b2ad1dcfafbadb37df",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://dd176a49cb1b578edebe1941c05e43938858cbc91d1643b7f0800ee0464b251c",
+				"dweb:/ipfs/QmXCmoRksDLn3GNrfJ71HPLdFqqQkMuXhZ7iHi9t3FiVxy"
+			]
+		},
+		"contracts/Ownable.sol": {
+			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://3d5a0e925546a5f5d969d37aac7092e58470562632e311c43d5fd6fce94af475",
+				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
+			]
+		}
+	},
+	"version": 1
+}

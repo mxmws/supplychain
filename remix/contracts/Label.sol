@@ -1,7 +1,30 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.18;
 
-import "./Product.sol";
+import "./Handshaker.sol";
 
-abstract contract Label is Product{
+contract Label is Handshaker{
+    bool IsValue;
+    string Name;
+    string Swarm_storage_address;
+
+    address[] ProductIds;
+
+    constructor(string memory _name, address _owner) {
+        Owner = _owner;
+        Name = _name;
+        IsValue= true;
+    }
+
+    function Set_IPFS(string calldata _ipfsAddress) public onlyOwner{
+        Swarm_storage_address = _ipfsAddress;
+    }
+
+    function Get_Name() public view returns(string memory){
+        return Name;
+    }
+
+    function Get_ProductIds() public view returns(address[] memory){
+        return Ids[relation.PRODUCT];
+    }
 }

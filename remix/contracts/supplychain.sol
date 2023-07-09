@@ -5,128 +5,95 @@ import "./Product.sol";
 import "./Label.sol";
 
 contract Supplychain {
-    struct label {
-        bool isValue;
-        string name;
-        uint productId;
-    }
+
+    event ProductAdded(address product, 
+                        string name, 
+                        address[] 
+                        predecessors, 
+                        address[] succcessors, 
+                        address[] lables);
 
     mapping (address => Product) products;
-    mapping (address => label) labels;
+    mapping (address => Label) labels;
 
-    event ProductAdded(
-        address indexed _user,
-        address _id,
-        string _name
-    );
 
-    event LabelAdded(
-        address indexed _user,
-        address _id,
-        string _name
-    );
+    function getProduct(address _id) public view returns (
+        string memory _name,
+        uint carbonFootprint,
+        string memory swarmStorageAddress,
+        address[] memory _labels,
+        address[] memory predecessors,
+        address[] memory successors
+    ) {
+        Product p = products[_id];
+        return (
+            p.Get_Name(),
+            p.Get_CarbonFootprint(),
+            p.Get_IpfsAddress(),
+            p.Get_LabelIDs(),
+            p.Get_Predecessors(),
+            p.Get_Successors()
+        );
+    }
 
-    event LinkAdded(
-        address indexed _user,
-        address _predecessorProductId,
-        address _successorProductId
-    );
-
-    event LinkRemoved(
-        address indexed _user,
-        address _predecessorProductId,
-        address _successorProductId
-    );
-
-    // this function shouldn't cost gas (not sure why it says infinite)
-    function getProduct(address _id) public view returns(Product){
-        // require(labels[_id].GetOwner() != address(0), "Product doesn't exist");
-        Product myProduct = products[_id];
-        return myProduct;
+    function getLabel(address _id) public view returns (
+        string memory _name,
+        address[] memory _labels){
+        Label l = labels[_id];
+        return(l.Get_Name(), l.Get_ProductIds());
     }
     
-    function addLabel(address _id, string memory _name, uint _productId) public {
-        require(!labels[_id].isValue, "Label with this ID already exists");
-        labels[_id] = label(true, _name, _productId);
-        // ToDo: Handshake
-        emit LabelAdded(msg.sender, _id, _name);
-    }
+    function addLabel(
+        string memory _name,
+        address[] memory _ProductIDs,
+        string memory _ipfsAddress
+    ) public returns (address) {
+        Label label = new Label(_name, msg.sender);
 
-    function addProduct(address _address, string memory _name, address[] memory _successors, address[] memory _predecessors, uint _carbonFootprint) public {
-        require(products[_address].owner() != address(0), "Product with this ID already exists");
-
-        // this is probably not the best way to do it but can't use constructor because struct contains mappings
-        Product prod = new Product(_name, _carbonFootprint);
-        prod.Set_SuccessorIds(_successors);
-        prod.Set_PredecessorIds(_predecessors);
-        prod.Set_CarbonFootPrint(_carbonFootprint);
-
-        // ToDo: Handshake
-        emit ProductAdded(msg.sender, _address, _name); // event will be on the blockchain forever
-    }
-
-    function addLink(address _predecessorProductId, address _successorProductId) public  {
-        // ToDo: Handshake / checking ownership
-        //1. check product in othter contract if self was added as candidate   
-            //no: enter other address into respective candidate mapping
-            //return
-        //2. yes: delete self in other candidate mapping
-        //3. update own successor/predecessor mapping
-        //4. update other successor/predecessor mapping
-            //--> how to handle ownership and stop attackers from deleting random products
+        for(uint i = 0; i < _ProductIDs.length; i++){
+            label.Add_Candidate(_ProductIDs[i], relation.PRODUCT); 
+        }        
         
-        // ToDo: make sure link doesn't exist yet
-        
+        label.Set_IPFS(_ipfsAddress);
 
-        // check if both products exist
-        Product predecessor = products[_predecessorProductId]; 
-        Product successor = products[_successorProductId];
-        require(predecessor.isValue() && successor.isValue(), "One or both products don't exist");
-
-        if(predecessor.Do_Handshake_To_Successor(_successorProductId)){
-            //handshake successfull, predecessor_candidate of successor was removed (set to false)
-        }
-        else{
-            successor.Do_Handshake_To_Predecessor(_predecessorProductId);
-        }
-
-        emit LinkAdded(msg.sender, _predecessorProductId, _successorProductId);
+        labels[address(label)] = label;
+        return address(label);
     }
 
-    function removeLink(address _predecessorProductId, address _successorProductId) public {
-        // Todo: Problem: searching an array can be very expensive
-        // check if both products exist
-        require(products[_predecessorProductId].isValue() && products[_successorProductId].isValue(), "One or both products don't exist");
+    function addProduct(
+        string memory _name,
+        uint _carbonFootprint,
+        address[] memory _labelIDs,
+        address[] memory _successors,
+        address[] memory _predecessors,
+        string memory _ipfsAddress
+    ) public returns (address) {
+        Product prod = new Product(_name, _carbonFootprint, msg.sender);
 
-        // get products
-        Product predecessor = products[_predecessorProductId];
-        Product successor = products[_successorProductId];
-
-        // remove links from products
-        uint predecessorIndex;
-        uint successorIndex;
-
-        // find index of _successorProductId in predecessor's successors
-        for (uint i = 0; i < predecessor.Get_Successor_Count(); i++) {
-            if (predecessor.successorIds(i) == _successorProductId) {
-                predecessorIndex = i;
-                break;
-            }
+        for(uint i = 0; i < _labelIDs.length; i++){
+            prod.Add_Candidate(_labelIDs[i], relation.LABEL); 
         }
 
-        // find index of _predecessorProductId in successor's predecessors
-        for (uint i = 0; i < successor.Get_Predecessor_Count(); i++) {
-            if (successor.predecessorIds(i) == _predecessorProductId) {
-                successorIndex = i;
-                break;
-            }
+        for(uint i = 0; i < _successors.length; i++){
+            prod.Add_Candidate(_successors[i], relation.SUCCESSOR); 
         }
 
-        // remove the links
-        // delete products[_predecessorProductId].successorIds[predecessorIndex];
-        // delete products[_successorProductId].predecessorIds[successorIndex];
+        for(uint i = 0; i < _predecessors.length; i++){
+            prod.Add_Candidate(_predecessors[i], relation.PREDECESSOR); 
+        }
+        prod.Set_IPFS(_ipfsAddress);
 
-        emit LinkRemoved(msg.sender, _predecessorProductId, _successorProductId);
+        products[address(prod)] = prod;
+
+        return address(prod);
+    }
+    
+    function Get_Product(address _productAddress) public view returns(Product){
+        return products[_productAddress];  
+    }
+
+    function Get_Label(address _labelAddress) public view returns(Label){
+        return labels[_labelAddress];
     }
 
 }

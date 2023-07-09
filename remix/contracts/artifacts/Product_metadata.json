@@ -16,23 +16,83 @@
 						"internalType": "uint256",
 						"name": "_carbonFootprint",
 						"type": "uint256"
+					},
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
 			{
-				"inputs": [],
-				"name": "Accept_PredecessorCandidate",
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					},
+					{
+						"indexed": false,
+						"internalType": "address[]",
+						"name": "ids",
+						"type": "address[]"
+					}
+				],
+				"name": "AcceptedHandshake",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Accept_Candidate",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "Accept_SuccessorCandidate",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Add_Candidate",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "Candidates",
+				"outputs": [
+					{
+						"internalType": "enum relation",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -51,19 +111,18 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "predecessor_address",
-						"type": "address"
-					}
-				],
-				"name": "Do_Handshake_To_Predecessor",
-				"outputs": [
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					},
 					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
+						"internalType": "uint256",
+						"name": "index",
+						"type": "uint256"
 					}
 				],
+				"name": "Delete_Id",
+				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
@@ -71,11 +130,16 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "successor_address",
+						"name": "Address",
 						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
 					}
 				],
-				"name": "Do_Handshake_To_Successor",
+				"name": "Do_Handshake",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -88,12 +152,122 @@
 			},
 			{
 				"inputs": [],
+				"name": "Get_CarbonFootprint",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Get_Ids",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_IpfsAddress",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_IsValue",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_LabelIDs",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_Name",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_Owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
 				"name": "Get_Predecessor_Count",
 				"outputs": [
 					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_Predecessors",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
 					}
 				],
 				"stateMutability": "view",
@@ -113,14 +287,32 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "Get_Successors",
+				"outputs": [
+					{
+						"internalType": "address[]",
+						"name": "",
+						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "predecessorAddress",
+						"name": "candidateAddress",
 						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
 					}
 				],
-				"name": "Has_PredecessorCandidate",
+				"name": "Has_Candidate",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -134,17 +326,22 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "successorAddress",
-						"type": "address"
+						"internalType": "enum relation",
+						"name": "",
+						"type": "uint8"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
-				"name": "Has_SuccessorCandidate",
+				"name": "Ids",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "address",
 						"name": "",
-						"type": "bool"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -166,12 +363,12 @@
 			{
 				"inputs": [
 					{
-						"internalType": "bool",
-						"name": "value",
-						"type": "bool"
+						"internalType": "string",
+						"name": "_ipfsAddress",
+						"type": "string"
 					}
 				],
-				"name": "Set_IsValue",
+				"name": "Set_IPFS",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -179,12 +376,12 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address[]",
-						"name": "new_LabelIds",
-						"type": "address[]"
+						"internalType": "bool",
+						"name": "value",
+						"type": "bool"
 					}
 				],
-				"name": "Set_LabelIds",
+				"name": "Set_IsValue",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -203,90 +400,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "new_predecessorIds",
-						"type": "address[]"
-					}
-				],
-				"name": "Set_PredecessorIds",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address[]",
-						"name": "new_successorIds",
-						"type": "address[]"
-					}
-				],
-				"name": "Set_SuccessorIds",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "carbonFootprint",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "isValue",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "labelIds",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "name",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -302,53 +415,15 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"name": "predecessorIdIsHandshakeCandidate",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
 					}
 				],
-				"name": "predecessorIdToArrayIndex",
+				"name": "products",
 				"outputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "predecessorIds",
-				"outputs": [
-					{
-						"internalType": "address",
+						"internalType": "contract Product",
 						"name": "",
 						"type": "address"
 					}
@@ -359,68 +434,41 @@
 			{
 				"inputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
 					}
 				],
-				"name": "successorIdIsHandshakeCandidate",
+				"name": "reverseRelation",
 				"outputs": [
 					{
-						"internalType": "bool",
+						"internalType": "enum relation",
 						"name": "",
-						"type": "bool"
+						"type": "uint8"
 					}
 				],
-				"stateMutability": "view",
+				"stateMutability": "pure",
 				"type": "function"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "successorIdToArrayIndex",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "successorIds",
-				"outputs": [
-					{
 						"internalType": "address",
 						"name": "",
 						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "swarm_storage_address",
+				"name": "userProducts",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint256",
 						"name": "",
-						"type": "string"
+						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -454,6 +502,14 @@
 		"remappings": []
 	},
 	"sources": {
+		"contracts/Handshaker.sol": {
+			"keccak256": "0x1cbb0ef5f834255c1aea2937e6bcc65bb6d9dbe51311eac7a77db15e69962a8e",
+			"license": "GPL-3.0-or-later",
+			"urls": [
+				"bzz-raw://c224b709dc331dbf9ab3545b559c91735ba153d1db442d9f66fc18b9755821e5",
+				"dweb:/ipfs/QmcskzeXpYiH2RnfZ2sPHhSjgyBhRw8KGXXkcyQUKiCukG"
+			]
+		},
 		"contracts/Ownable.sol": {
 			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
 			"license": "GPL-3.0-or-later",
@@ -463,11 +519,11 @@
 			]
 		},
 		"contracts/Product.sol": {
-			"keccak256": "0xc391f076bcdc73c268bd6284773fd4883d6f4a918e2aa2f95c59fcd1a85f3166",
+			"keccak256": "0xf8a0815524c1b8def93da8dbfa865104ea74633c64952415506e676253a0b0a2",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c1a8d00f45203ae3a875c0d44442a79eb5a89aca24b145dd5cf99d03b71b36c1",
-				"dweb:/ipfs/QmXyZeAt2ZoAfjN6wRC8BYoqYberwQTUsb8Smm3iUficPk"
+				"bzz-raw://a438a10b43292652e212fdb42a65d7f91bccea589ba944c1ea4ba38ba2732e3a",
+				"dweb:/ipfs/QmXa9hyJGogNFAc2bZHp16VxLf9gJJ6onik6QcjtMhrNK4"
 			]
 		}
 	},
