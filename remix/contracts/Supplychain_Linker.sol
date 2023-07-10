@@ -23,14 +23,14 @@ contract Supplychain_Linker {
         Handshaker secondContract;
 
         if(r1 == relation.LABEL )
-            firstContract = sc.Get_Label(firstAddress);
+            firstContract = sc.Get_Handshaker(firstAddress, relation.LABEL);
         else
-            firstContract = sc.Get_Product(firstAddress);
+            firstContract = sc.Get_Handshaker(firstAddress, relation.PRODUCT);
         
         if(r2 == relation.LABEL)
-            secondContract = sc.Get_Label(secondAddress);
+            secondContract = sc.Get_Handshaker(secondAddress, relation.LABEL);
         else
-            secondContract = sc.Get_Product(secondAddress);
+            secondContract = sc.Get_Handshaker(secondAddress, relation.PRODUCT);
 
         return (firstContract, secondContract);
     }

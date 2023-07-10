@@ -9,7 +9,7 @@ contract Supplychain {
     mapping (address => Label) labels;
 
 
-    function getProduct(address _id) public view returns (
+    function getProduct(address _id) external view returns (
         string memory _name,
         uint carbonFootprint,
         string memory swarmStorageAddress,
@@ -30,7 +30,7 @@ contract Supplychain {
         );
     }
 
-    function getLabel(address _id) public view returns (
+    function getLabel(address _id) external view returns (
         string memory _name,
         address[] memory _labels,
         string memory _ipfsAddress,
@@ -64,10 +64,10 @@ contract Supplychain {
         address[] memory _labelIDs,
         address[] memory _successors,
         address[] memory _predecessors,
-        string memory _ipfsAddress,
-        string memory _imageCid
-    ) public returns (address) {
-        Product prod = new Product(_name, _carbonFootprint, _imageCid, msg.sender);
+        string calldata _ipfsAddress,
+        string calldata _imageCid
+    ) external returns (address) {
+        Product prod = new Product(_name, _carbonFootprint, _ipfsAddress, _imageCid, msg.sender);
 
         for(uint i = 0; i < _labelIDs.length; i++){
             prod.Add_Candidate(_labelIDs[i], relation.LABEL); 
@@ -80,10 +80,18 @@ contract Supplychain {
         for(uint i = 0; i < _predecessors.length; i++){
             prod.Add_Candidate(_predecessors[i], relation.PREDECESSOR); 
         }
-        prod.Set_IPFS(_ipfsAddress);
 
         products[address(prod)] = prod;
 
         return address(prod);
+    }
+
+    function Get_Handshaker(address addr, relation r) public view returns(Handshaker handshaker){
+        if(r == relation.LABEL){
+            return labels[addr];
+        }
+        if(r == relation.PRODUCT){
+            return products[addr];
+        }
     }
 }

@@ -19,6 +19,11 @@
 					},
 					{
 						"internalType": "string",
+						"name": "_ipfsAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
 						"name": "_imageCid",
 						"type": "string"
 					},
@@ -321,58 +326,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "new_CarbonFootprint",
-						"type": "uint256"
-					}
-				],
-				"name": "Set_CarbonFootPrint",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_ipfsAddress",
-						"type": "string"
-					}
-				],
-				"name": "Set_IPFS",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bool",
-						"name": "value",
-						"type": "bool"
-					}
-				],
-				"name": "Set_IsValue",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "new_name",
-						"type": "string"
-					}
-				],
-				"name": "Set_Name",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
@@ -449,11 +402,11 @@
 			]
 		},
 		"remix/contracts/Product.sol": {
-			"keccak256": "0x514d6cfa551537af0644013dba6fe9b3bd78077c9f51b320031c8e2e8bc87e76",
+			"keccak256": "0xbc662382d000aa12e1e6131c7b6d507d4ca3010c385be0b1f758b99026b02ca4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e2fd35cda9fcf973b7314b674b727c4140c24ba54f0a9c22ba1dd7eb25f33bc2",
-				"dweb:/ipfs/QmUpxn15vWXbjhDCTRmFXAoeGDnBvbUff71jC8cpxzHRbf"
+				"bzz-raw://9c4537ffcc5756dd07314405478daf1e01cd9f8e142ed1145630271287214806",
+				"dweb:/ipfs/Qmc2WXbKWhR1Qv6WkJi3c9EEhsvJ8QARvPPS6JXbfdr47W"
 			]
 		}
 	},

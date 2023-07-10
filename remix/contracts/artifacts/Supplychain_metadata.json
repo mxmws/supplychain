@@ -8,6 +8,30 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					},
+					{
+						"internalType": "enum relation",
+						"name": "r",
+						"type": "uint8"
+					}
+				],
+				"name": "Get_Handshaker",
+				"outputs": [
+					{
+						"internalType": "contract Handshaker",
+						"name": "handshaker",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "string",
 						"name": "_name",
 						"type": "string"
@@ -224,19 +248,19 @@
 			]
 		},
 		"remix/contracts/Product.sol": {
-			"keccak256": "0x514d6cfa551537af0644013dba6fe9b3bd78077c9f51b320031c8e2e8bc87e76",
+			"keccak256": "0xbc662382d000aa12e1e6131c7b6d507d4ca3010c385be0b1f758b99026b02ca4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e2fd35cda9fcf973b7314b674b727c4140c24ba54f0a9c22ba1dd7eb25f33bc2",
-				"dweb:/ipfs/QmUpxn15vWXbjhDCTRmFXAoeGDnBvbUff71jC8cpxzHRbf"
+				"bzz-raw://9c4537ffcc5756dd07314405478daf1e01cd9f8e142ed1145630271287214806",
+				"dweb:/ipfs/Qmc2WXbKWhR1Qv6WkJi3c9EEhsvJ8QARvPPS6JXbfdr47W"
 			]
 		},
 		"remix/contracts/supplychain.sol": {
-			"keccak256": "0xa8243e6be7126373974eeef58fdf8d6ed4989010c18b6900ba365699a758e0e7",
+			"keccak256": "0x3f32f481bb57297c3b46c3512119a999a89ed2edae6d3f5394b72419307c9595",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://cfcc388ebfdf0cd86e393fb7c9dfa5b0cd7f3da1511c7f26b85245997589b9c2",
-				"dweb:/ipfs/QmcDP2WE6WpKCz8h9QuKnS8m3SycZCSKJHUCZswtEoD4UE"
+				"bzz-raw://231fbfee306dc145c28ab58b0f069c5ef901ba81437a3f2e0850f4c6fbcb2e86",
+				"dweb:/ipfs/QmX2MiyQrEMnfFaoDiPBrtWaZrySKBLsmmYRXCtuMLj4MJ"
 			]
 		}
 	},
