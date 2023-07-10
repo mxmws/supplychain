@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import supplyChain from "../contract"; // Import your supplyChain contract
+import {Link} from "react-router-dom"
 
 const ProductInfo = () => {
   const { productAddress } = useParams()
@@ -32,7 +33,10 @@ const ProductInfo = () => {
           <h4>Predecessors: {product.predecessors}</h4>
           <h4>Successors: {product.successors}</h4>
           <h4>Download Files: <button><a href={product.swarmStorageAddress}>Download</a></button></h4>
-        </div>
+          <Link to={`/graph/${productAddress}`}>
+            <button>Show Graph</button>
+          </Link>
+          </div>
       ) : (
         <p>Loading...</p>
       )}
