@@ -6,81 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "address",
-						"name": "product",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "address[]",
-						"name": "predecessors",
-						"type": "address[]"
-					},
-					{
-						"indexed": false,
-						"internalType": "address[]",
-						"name": "succcessors",
-						"type": "address[]"
-					},
-					{
-						"indexed": false,
-						"internalType": "address[]",
-						"name": "lables",
-						"type": "address[]"
-					}
-				],
-				"name": "ProductAdded",
-				"type": "event"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_labelAddress",
-						"type": "address"
-					}
-				],
-				"name": "Get_Label",
-				"outputs": [
-					{
-						"internalType": "contract Label",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_productAddress",
-						"type": "address"
-					}
-				],
-				"name": "Get_Product",
-				"outputs": [
-					{
-						"internalType": "contract Product",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -95,6 +20,11 @@
 					{
 						"internalType": "string",
 						"name": "_ipfsAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_imageCid",
 						"type": "string"
 					}
 				],
@@ -140,6 +70,11 @@
 						"internalType": "string",
 						"name": "_ipfsAddress",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_imageCid",
+						"type": "string"
 					}
 				],
 				"name": "addProduct",
@@ -172,6 +107,16 @@
 						"internalType": "address[]",
 						"name": "_labels",
 						"type": "address[]"
+					},
+					{
+						"internalType": "string",
+						"name": "_ipfsAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_iamgeCid",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -200,6 +145,11 @@
 					{
 						"internalType": "string",
 						"name": "swarmStorageAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "imageCid",
 						"type": "string"
 					},
 					{
@@ -235,7 +185,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/supplychain.sol": "Supplychain"
+			"remix/contracts/supplychain.sol": "Supplychain"
 		},
 		"evmVersion": "paris",
 		"libraries": {},
@@ -249,23 +199,23 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Handshaker.sol": {
-			"keccak256": "0x3b4c62dd3c2a6e1c2da9752651e836d1487fe17a6914100eb299bf79e4d92c2f",
+		"remix/contracts/Handshaker.sol": {
+			"keccak256": "0x5721e60a7f34b1f9c6775d2a807d94460e3dace565afb2b2ad1dcfafbadb37df",
 			"license": "GPL-3.0-or-later",
 			"urls": [
-				"bzz-raw://a7d2bd16b0e1a69cb634b31769cfba036519b87bc1d1accb9115c81fddab545c",
-				"dweb:/ipfs/QmQw8k7B2NTYcg58LyZbvv4mea7HGFzKqjjFFoboXRcuAX"
+				"bzz-raw://dd176a49cb1b578edebe1941c05e43938858cbc91d1643b7f0800ee0464b251c",
+				"dweb:/ipfs/QmXCmoRksDLn3GNrfJ71HPLdFqqQkMuXhZ7iHi9t3FiVxy"
 			]
 		},
-		"contracts/Label.sol": {
-			"keccak256": "0x9a7c6e0a6e1c3c06a1a704ec2b55281cc3b671920597142386e364efbee12181",
+		"remix/contracts/Label.sol": {
+			"keccak256": "0x05d3be548fb26b1662e2c35ccfb49d836363fda8a8cd3b35623fdcfa9f9c5776",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8b0d2baf0281efdce2f41532de5d3528d77869b12c3f237b50513188a9a25df1",
-				"dweb:/ipfs/QmUBfqEbdKcH1mVVbdnR3XothhL9LD9oCQL7niXLoP7YZU"
+				"bzz-raw://77bb5f58addf9caafb8c94fc2511e3a9a8dddb04153c6c18fbb25062b041850c",
+				"dweb:/ipfs/QmfEtFuuYPFLmMo2BPPZmdc2AGZxGYd3jrEFFFSyeU72YM"
 			]
 		},
-		"contracts/Ownable.sol": {
+		"remix/contracts/Ownable.sol": {
 			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
 			"license": "GPL-3.0-or-later",
 			"urls": [
@@ -273,20 +223,20 @@
 				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
 			]
 		},
-		"contracts/Product.sol": {
-			"keccak256": "0xf8a0815524c1b8def93da8dbfa865104ea74633c64952415506e676253a0b0a2",
+		"remix/contracts/Product.sol": {
+			"keccak256": "0x514d6cfa551537af0644013dba6fe9b3bd78077c9f51b320031c8e2e8bc87e76",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a438a10b43292652e212fdb42a65d7f91bccea589ba944c1ea4ba38ba2732e3a",
-				"dweb:/ipfs/QmXa9hyJGogNFAc2bZHp16VxLf9gJJ6onik6QcjtMhrNK4"
+				"bzz-raw://e2fd35cda9fcf973b7314b674b727c4140c24ba54f0a9c22ba1dd7eb25f33bc2",
+				"dweb:/ipfs/QmUpxn15vWXbjhDCTRmFXAoeGDnBvbUff71jC8cpxzHRbf"
 			]
 		},
-		"contracts/supplychain.sol": {
-			"keccak256": "0xeb3cd1bf8b9765588c05fe0513b9344f6ce28c457c9067d636024848e8068629",
+		"remix/contracts/supplychain.sol": {
+			"keccak256": "0xa8243e6be7126373974eeef58fdf8d6ed4989010c18b6900ba365699a758e0e7",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://68a66e7a528ef3c82c9f51acea9badf35223c575361d1b8744f133b3fc74871c",
-				"dweb:/ipfs/QmRLcsFjEuGHvke9QYavmosjG7dM4Cd8gViKwjb7N4CujR"
+				"bzz-raw://cfcc388ebfdf0cd86e393fb7c9dfa5b0cd7f3da1511c7f26b85245997589b9c2",
+				"dweb:/ipfs/QmcDP2WE6WpKCz8h9QuKnS8m3SycZCSKJHUCZswtEoD4UE"
 			]
 		}
 	},
