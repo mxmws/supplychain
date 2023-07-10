@@ -8,9 +8,11 @@ import ProductInfo from './pages/product_info'
 import AddProduct from './pages/add_product';
 import AddLabel from './pages/add_label';
 import AddLink from './pages/add_link';
-import CreateLabel from './pages/create_label';
+import GetLabel from './pages/get_label';
+import LabelInfo from './pages/label_info';
 import RemoveLabel from './pages/remove_label';
 import RemoveLink from './pages/remove_link';
+
 
 
 function App(){
@@ -29,7 +31,7 @@ function App(){
           <Link to="/add_product" className='link-style'>Add Product</Link>
           <Link to="/add_label" className='link-style'>Add Label</Link>
           <Link to="/add_link" className='link-style'>Add Link</Link>
-          <Link to="/create_label" className='link-style'>Create Label</Link>
+          <Link to="/get_label" className='link-style'>Get Label</Link>
           <Link to="/remove_label" className='link-style'>Remove Label</Link>
           <Link to="/remove_link" className='link-style'>Remove Link</Link>
         </div>
@@ -41,7 +43,8 @@ function App(){
             <Route path="/product_info/:productAddress" Component={ProductInfo}></Route>
             <Route path='/add_label' Component={AddLabel}></Route>
             <Route path='/add_link' Component={AddLink}></Route>
-            <Route path='/create_label' Component={CreateLabel}></Route>
+            <Route path='/get_label' Component={GetLabel}></Route>
+            <Route path='/label_info/:labelAddress' Component={LabelInfo}></Route>
             <Route path='/remove_label' Component={RemoveLabel}></Route>
             <Route path='/remove_link' Component={RemoveLink}></Route>
           </Routes>
@@ -54,3 +57,4 @@ function App(){
 }
 
 export default App;
+

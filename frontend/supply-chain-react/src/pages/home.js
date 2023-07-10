@@ -1,12 +1,10 @@
 import React, {useState} from "react";
 
 //const supplyChain = require('../contract.js')
-import supplyChain from '../contract.js'
-import ProductInfo from "./product_info.js";
 import {Link} from "react-router-dom"
 
 
-const GetInfo = () => {
+const GetInfo = () => { 
   const [productAddress, setProductAddress] = useState("");
 
   const handleInputChange = (event) => {
