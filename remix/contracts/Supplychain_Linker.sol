@@ -13,11 +13,15 @@ contract Supplychain_Linker {
     event LinkRemoved(address firstContract,
                         address SecondContract);
 
-    function GetHandshakers(address _supplychainId, address firstAddress, relation r1, address secondAddress, relation r2) private view returns(Handshaker, Handshaker){
+    address SupplychainId;
+    constructor(address _supplychainId){
+        SupplychainId = _supplychainId;
+    }
+    function GetHandshakers(address firstAddress, relation r1, address secondAddress, relation r2) private view returns(Handshaker, Handshaker){
         
         require(r1 != relation.NONE && r2 != relation.NONE, "relations should not be NONE");
         
-        Supplychain sc = Supplychain(_supplychainId);
+        Supplychain sc = Supplychain(SupplychainId);
         
         Handshaker firstContract;
         Handshaker secondContract;
@@ -35,9 +39,9 @@ contract Supplychain_Linker {
         return (firstContract, secondContract);
     }
 
-    function addLink(address _supplychainId, address firstAddress, relation r1, address secondAddress, relation r2) public returns(bool handshake_complete)  {
+    function addLink(address firstAddress, relation r1, address secondAddress, relation r2) public returns(bool handshake_complete)  {
                     //label                   product//label             LABEL       prooduct                PRODUCT
-        (Handshaker firstContract, Handshaker secondContract) = GetHandshakers(_supplychainId, firstAddress, r1, secondAddress, r2);
+        (Handshaker firstContract, Handshaker secondContract) = GetHandshakers(firstAddress, r1, secondAddress, r2);
         if(msg.sender == firstContract.Get_Owner())
         {                  //label                          //product          LABEL
             bool success = firstContract.Do_Handshake(address(secondContract), r2);            
@@ -60,9 +64,9 @@ contract Supplychain_Linker {
         }
     }
 
-    function removeLink(address _supplychainId, address firstAddress, relation r1, address secondAddress, relation r2) public {    
+    function removeLink(address firstAddress, relation r1, address secondAddress, relation r2) public {    
         
-        (Handshaker firstContract, Handshaker secondContract) = GetHandshakers(_supplychainId, firstAddress, r1, secondAddress, r2);
+        (Handshaker firstContract, Handshaker secondContract) = GetHandshakers(firstAddress, r1, secondAddress, r2);
         
         require(msg.sender == firstContract.Get_Owner() || msg.sender == secondContract.Get_Owner(), "Links can only be removed by either of the owners");
         
