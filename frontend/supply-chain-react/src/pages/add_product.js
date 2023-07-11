@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import supplyChain from '../contract.js'
 import {ethers} from 'ethers'
 
@@ -30,20 +30,21 @@ async function addProduct() {
       .catch((error) => {
         // Handle any errors that occur during the function call
         console.error("Error adding product:", error)
-      });
+      })
   }
   
 
 const AddProduct=()=>{
     return(
         <div>
-            <h4>ETH Private Key: <input type="text" id="privateKeyInput"></input></h4>
-            <h4>Product Name: <input type="text" id="nameInput"></input></h4>
-            <h4>Carbon Footprint: <input type="text" id="carbonFootprintInput"></input></h4>
-            <h4>Labels: <input type="text" id="labelsInput"></input></h4>
-            <h4>Successors: <input type="text" id="successorsInput"></input></h4>
-            <h4>Predecessors: <input type="text" id="predecessorsInput"></input></h4>
-            <h4>Upload PDF: <input type="text" id="ipfsAddressInput"></input></h4>
+            <h4>Add Label</h4>
+            <h5>ETH Private Key: <input type="text" id="privateKeyInput"></input></h5>
+            <h5>Product Name: <input type="text" id="nameInput"></input></h5>
+            <h5>Carbon Footprint: <input type="text" id="carbonFootprintInput"></input></h5>
+            <h5>Labels: <input type="text" id="labelsInput"></input></h5>
+            <h5>Successors: <input type="text" id="successorsInput"></input></h5>
+            <h5>Predecessors: <input type="text" id="predecessorsInput"></input></h5>
+            <h5>Upload PDF: <input type="text" id="ipfsAddressInput"></input></h5>
             <button class="button" onClick={addProduct}>Add Product</button>
         </div>
     )

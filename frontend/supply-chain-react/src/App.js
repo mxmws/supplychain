@@ -1,8 +1,9 @@
+// Import necessary liberies and dependies 
 import React, { Component } from 'react'
 import './App.css'
-//import { providers, Contract } from "ethers"
 import { BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 
+// Import Components for Routes
 import GetInfo from './pages/home';
 import ProductInfo from './pages/product_info'
 import AddProduct from './pages/add_product';
@@ -10,32 +11,34 @@ import AddLabel from './pages/add_label';
 import AddLink from './pages/add_link';
 import GetLabel from './pages/get_label';
 import LabelInfo from './pages/label_info';
-import RemoveLabel from './pages/remove_label';
 import RemoveLink from './pages/remove_link';
 
-
-
+// Main App component
 function App(){
   return (
       
     <Router>
 
+      {/* Header of website */}
       <div className="header">
         <h1><a to="/">Make Supply Chain More Transparent</a></h1>
       </div>
 
+      {/* Main container */}
       <div className="container">
 
+        {/* Side navigation */}
         <div className="side-nav">
+          {/* Link to pages */}
           <Link to="/" className='link-style'>Search Product</Link>
           <Link to="/add_product" className='link-style'>Add Product</Link>
           <Link to="/add_label" className='link-style'>Add Label</Link>
-          <Link to="/add_link" className='link-style'>Add Link</Link>
           <Link to="/get_label" className='link-style'>Get Label</Link>
-          <Link to="/remove_label" className='link-style'>Remove Label</Link>
+          <Link to="/add_link" className='link-style'>Add Link</Link>
           <Link to="/remove_link" className='link-style'>Remove Link</Link>
         </div>
 
+        {/* Content depends on url*/}
         <div className="content">
           <Routes>
             <Route exact path="/" Component={GetInfo}></Route>
@@ -45,7 +48,6 @@ function App(){
             <Route path='/add_link' Component={AddLink}></Route>
             <Route path='/get_label' Component={GetLabel}></Route>
             <Route path='/label_info/:labelAddress' Component={LabelInfo}></Route>
-            <Route path='/remove_label' Component={RemoveLabel}></Route>
             <Route path='/remove_link' Component={RemoveLink}></Route>
           </Routes>
         </div>

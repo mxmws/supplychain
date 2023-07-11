@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import supplyChain from "../contract"; // Import your supplyChain contract
+import React, { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
+import supplyChain from "../contract" // Import supplyChain contract
 
 const LabelInfo = () => {
   const { labelAddress } = useParams()
@@ -9,7 +9,7 @@ const LabelInfo = () => {
   useEffect(() => {
     const fetchLabel = async () => {
       try {
-        // Call the getLabel function of your supplyChain contract
+        // Call the getLabel function of supplyChain contract
         const label = await supplyChain.getLabel(labelAddress)
         console.log(label)
         setLabel(label)
@@ -23,17 +23,17 @@ const LabelInfo = () => {
 
   return (
     <div>
-      <h2>Label Info</h2>
       {label ? (
         <div>
-          <h4>Label Name: {label._name}</h4>
-          <h4>Labeled Product IDs: {label._labels}</h4>
+          <h4>Label Information</h4>
+          <h5>Label Name: {label._name}</h5>
+          <h5>Labeled Product IDs: {label._labels}</h5>
         </div>
       ) : (
         <p>Loading...</p>
       )}
     </div>
-  );
-};
+  )
+}
 
 export default LabelInfo;

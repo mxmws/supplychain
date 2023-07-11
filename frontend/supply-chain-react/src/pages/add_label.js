@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 import supplyChain from '../contract.js'
 import {ethers} from 'ethers'
 
@@ -16,7 +16,7 @@ async function addLabel() {
     const provider = new ethers.providers.JsonRpcProvider("https://goerli.infura.io/v3/"+INFURA_KEY)
     const signer = new ethers.Wallet(privateKey, provider)
 
-    // Call the addProduct() function with the retrieved values
+    // Call the addLabel() function with the retrieved values
     await supplyChain.connect(signer).addLabel(labelName, productIDs,ipfsAddress,{gasLimit:5000000})
       .then((result) => {
         // Handle the result if necessary
@@ -24,20 +24,21 @@ async function addLabel() {
       })
       .catch((error) => {
         // Handle any errors that occur during the function call
-        console.error("Error adding product:", error)
-      });
+        console.error("Error adding label:", error)
+      })
   }
 
 const AddLabel=()=>{
     return(
         <div>
-            <h4>Private ETH Key: <input type="text" id="privateKeyInput"></input></h4>
-            <h4>Label Name: <input type="text" id="labelNameInput"></input></h4>
-            <h4>Product IDs: <input type="text" id="productIDsInput"></input></h4>
-            <h4>IPFS Address: <input type="text" id="ipfsAddressInput"></input></h4>
+            <h4>Add Label</h4>
+            <h5>Private ETH Key: <input type="text" id="privateKeyInput"></input></h5>
+            <h5>Label Name: <input type="text" id="labelNameInput"></input></h5>
+            <h5>Product IDs: <input type="text" id="productIDsInput"></input></h5>
+            <h5>IPFS Address: <input type="text" id="ipfsAddressInput"></input></h5>
             <button class="button" onClick={addLabel}>Add Label</button>
         </div>
     )
 }
 
-export default AddLabel;
+export default AddLabel
