@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import supplyChain from "../contract" // Import supplyChain contract
+import {Link} from "react-router-dom"
 
 const ProductInfo = () => {
 
@@ -10,23 +11,25 @@ const ProductInfo = () => {
   // Define state for product
   const [product, setProduct] = useState(null)
 
+  const fetchProduct = async () => {
+    try {
+      // Call the getProduct function of supplyChain contract
+      const product = await supplyChain.getProduct(productAddress)
+
+      // Output the product data to the console (for testing purposes)
+      console.log(product)
+
+      // Set the product state with the retrieved product data
+      setProduct(product)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   useEffect(() => {
     // Fetch product data when the component mounts or the productAddress changes
     
-    const fetchProduct = async () => {
-      try {
-        // Call the getProduct function of supplyChain contract
-        const product = await supplyChain.getProduct(productAddress)
-
-        // Output the product data to the console (for testing purposes)
-        console.log(product)
-
-        // Set the product state with the retrieved product data
-        setProduct(product)
-      } catch (error) {
-        console.error(error)
-      }
-    }
+    
 
     fetchProduct()
   }, [productAddress])
@@ -43,7 +46,10 @@ const ProductInfo = () => {
           <h5>Predecessors: {product.predecessors}</h5>
           <h5>Successors: {product.successors}</h5>
           <h5>Download Files: <button><a href={product.swarmStorageAddress}>Download</a></button></h5>
-        </div>
+          <Link to={`/graph/${productAddress}`}>
+            <button>Show Graph</button>
+          </Link>
+          </div>
       ) : (
         // Display a loading message while product data is being fetched
         <p>Loading...</p>

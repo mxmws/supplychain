@@ -12,6 +12,7 @@ import AddLink from './pages/add_link';
 import GetLabel from './pages/get_label';
 import LabelInfo from './pages/label_info';
 import RemoveLink from './pages/remove_link';
+import Graph from './pages/graph';
 
 // Main App component
 function App(){
@@ -49,6 +50,7 @@ function App(){
             <Route path='/get_label' Component={GetLabel}></Route>
             <Route path='/label_info/:labelAddress' Component={LabelInfo}></Route>
             <Route path='/remove_link' Component={RemoveLink}></Route>
+            <Route path='/graph/:productAddress' Component={Graph}></Route>
           </Routes>
         </div>
 
