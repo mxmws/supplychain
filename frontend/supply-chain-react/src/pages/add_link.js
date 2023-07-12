@@ -5,7 +5,6 @@ import {ethers} from 'ethers'
 async function addLabel() {
     // Retrieve the input values
     var privateKey = document.getElementById("privateKeyInput").value
-    var supplyChainID = document.getElementById("supplyChainIDInput").value
     var firstAddress = document.getElementById("firstAddressInput").value
     var firstRelation = parseInt(document.getElementById("firstRelationInput").value, 10)
     var secondAddress = document.getElementById("secondAddressInput").value
@@ -16,7 +15,7 @@ async function addLabel() {
     const signer = new ethers.Wallet(privateKey, provider)
 
     // Call the addLink() function with the retrieved values
-    await supplyChainLinker.connect(signer).addLink(supplyChainID, firstAddress,firstRelation, secondAddress, secondRelation,{gasLimit:5000000})
+    await supplyChainLinker.connect(signer).addLink(firstAddress,firstRelation, secondAddress, secondRelation,{gasLimit:5000000})
       .then((result) => {
         // Handle the result if necessary
         console.log("Link added:", result)
@@ -32,7 +31,6 @@ const AddLink=()=>{
         <div>
             <h4>Add link</h4>
             <h5>Private ETH Key: <input type="text" id="privateKeyInput"></input></h5>
-            <h5>Supply Chain ID: <input type="text" id="supplyChainIDInput"></input></h5>
             <h5>First Address: <input type="text" id="firstAddressInput"></input></h5>
             <h5>First Relation: <input type="text" id="firstRelationInput"></input></h5><h6>*[0:None, 1:Predecessor, 2:Successor, 3:Label, 4:Product]</h6>
             <h5>Second Address: <input type="text" id="secondAddressInput"></input></h5>

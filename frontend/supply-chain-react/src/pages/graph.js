@@ -30,6 +30,7 @@ const Graph = () => {
                 .css({
                     'height': 80,
                     'width': 80,
+                    'background-image': 'data(imageUrl)',
                     'background-fit': 'cover',
                     'border-color': '#000',
                     'border-width': 3,
@@ -39,7 +40,7 @@ const Graph = () => {
                     'text-halign': 'center',
                     'text-margin-y': '8px', // Add margin below the text
                     'text-background-color': '#fff', // Background color behind the text
-                    'text-background-opacity': 1, // Opacity of the background
+                    'text-background-opacity': 0.5, // Opacity of the background
                     'color': '#000',
                     'font-size': '20px'
                 })
@@ -130,37 +131,53 @@ const Graph = () => {
             { source: 'rim', name: 'paint', imageUrl: '_https://live.staticflickr.com/2660/3715569167_7e978e8319_b.jpg' }
         ];
         */
-
         const fetchProducts = async (startAddress) => {
-
-            var existingNodes = []
-            var address_pairs = []
             try {
-                // Call the getProduct function of supplyChain contract
-                const product = await supplyChain.getProduct(startAddress)
-                existingNodes.push({ name: product._name, id: startAddress, imageUrl: 'asdf'})
-                address_pairs.push({ address: startAddress, successors: product.predecessors })
-                
+                const existingNodes = [];
+                const address_pairs = [];
 
-                
-                var arrayLength = address_pairs[0].successors.length;
-                for (var i = 0; i < arrayLength; i++) {
-                    const successor_address = address_pairs[0].successors[i]
-                    if (successor_address == "0x0000000000000000000000000000000000000000"){
-                        continue;
-                    }
-                    const successor_product = await supplyChain.getProduct(successor_address)
-                    existingNodes.push({ source: address_pairs[0].address, id: successor_address, name: successor_product._name, imageUrl: 'asdf'});
-                    
-                }
-                
+                const product = await supplyChain.getProduct(startAddress);
+                existingNodes.push({
+                    name: product._name,
+                    id: startAddress,
+                    imageUrl: product.imageCid || "x",
+                });
+                address_pairs.push({ address: startAddress, successors: product.predecessors });
+
+                await fetchPredecessors(existingNodes, address_pairs);
+
                 addNodes(existingNodes);
-
             } catch (error) {
-                console.error(error)
-                //alert(error)
+                console.error(error);
+                // alert(error)
             }
-        }
+        };
+
+        const fetchPredecessors = async (existingNodes, address_pairs) => {
+            const predecessors = address_pairs.flatMap(pair => pair.successors);
+            const uniquePredecessors = [...new Set(predecessors)];
+
+            for (const predecessor of uniquePredecessors) {
+                if (predecessor === "0x0000000000000000000000000000000000000000") {
+                    continue;
+                }
+
+                const predecessorProduct = await supplyChain.getProduct(predecessor);
+                existingNodes.push({
+                    source: address_pairs[0].address,
+                    id: predecessor,
+                    name: predecessorProduct._name,
+                    imageUrl: predecessorProduct.imageCid || "x",
+                });
+
+                const predecessorAddressPairs = {
+                    address: predecessor,
+                    successors: predecessorProduct.predecessors,
+                };
+
+                await fetchPredecessors(existingNodes, [predecessorAddressPairs]);
+            }
+        };
         fetchProducts(productAddress)
 
 
@@ -219,12 +236,12 @@ const Graph = () => {
         
         }); // on tap
         */
-        cy.on('tap', 'node', function(event){
-          var node = this;
-          var link = '/product_info/' + node.id();
-          window.location.href = link;
+        cy.on('tap', 'node', function (event) {
+            var node = this;
+            var link = '/product_info/' + node.id();
+            window.location.href = link;
         });
-      
+
     }
 
     useEffect(() => {
