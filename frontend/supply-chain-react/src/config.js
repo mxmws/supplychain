@@ -1,17 +1,11 @@
-export const contract_address_1 = "0x2fb08a457e7dfa5c2ee293674ea664ff32568a37"
+export const contract_address_supplychain = "0xb7C4a348Ceb43d9e6DB6645E6461307DcCeAb20d"
 
-export const contract_address_2 = "0x875893e861820feacd8c7c0168f4461ddb58103d"
+export const contract_address_linker = "0x1B1bB81C6A082aDf5d0Dc2b725ED93Ab882E0208"
 
-export const contract_abi_1 = [
+export const contract_abi_supplychain = [
 	{
 		"anonymous": false,
 		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "product",
-				"type": "address"
-			},
 			{
 				"indexed": false,
 				"internalType": "string",
@@ -20,21 +14,40 @@ export const contract_abi_1 = [
 			},
 			{
 				"indexed": false,
-				"internalType": "address[]",
-				"name": "predecessors",
-				"type": "address[]"
+				"internalType": "address",
+				"name": "ownerId",
+				"type": "address"
 			},
 			{
 				"indexed": false,
-				"internalType": "address[]",
-				"name": "succcessors",
-				"type": "address[]"
+				"internalType": "address",
+				"name": "labelId",
+				"type": "address"
+			}
+		],
+		"name": "LabelAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
 			},
 			{
 				"indexed": false,
-				"internalType": "address[]",
-				"name": "lables",
-				"type": "address[]"
+				"internalType": "address",
+				"name": "ownerId",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "productId",
+				"type": "address"
 			}
 		],
 		"name": "ProductAdded",
@@ -44,34 +57,20 @@ export const contract_abi_1 = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_labelAddress",
+				"name": "addr",
 				"type": "address"
+			},
+			{
+				"internalType": "enum relation",
+				"name": "r",
+				"type": "uint8"
 			}
 		],
-		"name": "Get_Label",
+		"name": "Get_Handshaker",
 		"outputs": [
 			{
-				"internalType": "contract Label",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_productAddress",
-				"type": "address"
-			}
-		],
-		"name": "Get_Product",
-		"outputs": [
-			{
-				"internalType": "contract Product",
-				"name": "",
+				"internalType": "contract Handshaker",
+				"name": "handshaker",
 				"type": "address"
 			}
 		],
@@ -93,6 +92,11 @@ export const contract_abi_1 = [
 			{
 				"internalType": "string",
 				"name": "_ipfsAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_imageCid",
 				"type": "string"
 			}
 		],
@@ -138,6 +142,11 @@ export const contract_abi_1 = [
 				"internalType": "string",
 				"name": "_ipfsAddress",
 				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_imageCid",
+				"type": "string"
 			}
 		],
 		"name": "addProduct",
@@ -170,6 +179,16 @@ export const contract_abi_1 = [
 				"internalType": "address[]",
 				"name": "_labels",
 				"type": "address[]"
+			},
+			{
+				"internalType": "string",
+				"name": "_ipfsAddress",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_iamgeCid",
+				"type": "string"
 			}
 		],
 		"stateMutability": "view",
@@ -201,6 +220,11 @@ export const contract_abi_1 = [
 				"type": "string"
 			},
 			{
+				"internalType": "string",
+				"name": "imageCid",
+				"type": "string"
+			},
+			{
 				"internalType": "address[]",
 				"name": "_labels",
 				"type": "address[]"
@@ -223,45 +247,17 @@ export const contract_abi_1 = [
 
 
 
-export const contract_abi_2 = [
+export const contract_abi_linker = [
 	{
 		"inputs": [
 			{
 				"internalType": "address",
 				"name": "_supplychainId",
 				"type": "address"
-			},
-			{
-				"internalType": "address",
-				"name": "firstAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "enum relation",
-				"name": "r1",
-				"type": "uint8"
-			},
-			{
-				"internalType": "address",
-				"name": "secondAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "enum relation",
-				"name": "r2",
-				"type": "uint8"
-			}
-		],
-		"name": "addLink",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "handshake_complete",
-				"type": "bool"
 			}
 		],
 		"stateMutability": "nonpayable",
-		"type": "function"
+		"type": "constructor"
 	},
 	{
 		"anonymous": false,
@@ -305,9 +301,38 @@ export const contract_abi_2 = [
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_supplychainId",
+				"name": "firstAddress",
 				"type": "address"
 			},
+			{
+				"internalType": "enum relation",
+				"name": "r1",
+				"type": "uint8"
+			},
+			{
+				"internalType": "address",
+				"name": "secondAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "enum relation",
+				"name": "r2",
+				"type": "uint8"
+			}
+		],
+		"name": "addLink",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "handshake_complete",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
 			{
 				"internalType": "address",
 				"name": "firstAddress",

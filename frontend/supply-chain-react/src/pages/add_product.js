@@ -11,6 +11,7 @@ async function addProduct() {
     //var successors = (document.getElementById("successorsInput").value.split(","))
     //var predecessors = (document.getElementById("predecessorsInput").value.split(","))
     var ipfsAddress = (document.getElementById("ipfsAddressInput").value)
+    var imageCid = (document.getElementById("imageCidInput").value)
 
     //following vars that received from UI could not be reconozed as array by addProdyct() now, it will be fixed later
     var labels = []
@@ -22,22 +23,29 @@ async function addProduct() {
     const signer = new ethers.Wallet(privateKey, provider)
 
     // Call the addProduct() function with the retrieved values
-    await supplyChain.connect(signer).addProduct(name, carbonFootprint, labels, successors, predecessors, ipfsAddress,{gasLimit:5000000})
+    var contract = await supplyChain.connect(signer)
+    const tx = await contract.addProduct(name, carbonFootprint, labels, successors, predecessors, ipfsAddress, imageCid, {gasLimit:5000000})
       .then((result) => {
         // Handle the result if necessary
         console.log("Product added:", result)
+        return result
       })
       .catch((error) => {
         // Handle any errors that occur during the function call
         console.error("Error adding product:", error)
       })
+    
+    const rc = await tx.wait()
+
+    const event = rc.events.find(event => event.event === 'ProductAdded');
+    console.log(event)
   }
   
 
 const AddProduct=()=>{
     return(
         <div>
-            <h4>Add Label</h4>
+            <h4>Add Product</h4>
             <h5>ETH Private Key: <input type="text" id="privateKeyInput"></input></h5>
             <h5>Product Name: <input type="text" id="nameInput"></input></h5>
             <h5>Carbon Footprint: <input type="text" id="carbonFootprintInput"></input></h5>
@@ -45,6 +53,7 @@ const AddProduct=()=>{
             <h5>Successors: <input type="text" id="successorsInput"></input></h5>
             <h5>Predecessors: <input type="text" id="predecessorsInput"></input></h5>
             <h5>Upload PDF: <input type="text" id="ipfsAddressInput"></input></h5>
+            <h5>Upload Image: <input type="text" id="imageCidInput"></input></h5>
             <button class="button" onClick={addProduct}>Add Product</button>
         </div>
     )
