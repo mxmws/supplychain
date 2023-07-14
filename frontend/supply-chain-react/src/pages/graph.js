@@ -5,13 +5,16 @@ import { Link } from "react-router-dom";
 
 
 import cytoscape from 'cytoscape'
+import dagre from 'cytoscape-dagre';
+
+cytoscape.use( dagre );
 
 
 const Graph = () => {
     const graphRef = useRef(null);
 
     let cyStyle = {
-        width: '70%',
+        width: '90%',
         height: '60vh',
         margin: '20px 0px'
     };
@@ -28,21 +31,21 @@ const Graph = () => {
             style: cytoscape.stylesheet()
                 .selector('node')
                 .css({
-                    'height': 80,
-                    'width': 80,
+                    'height': 60,
+                    'width': 60,
                     'background-image': 'data(imageUrl)',
                     'background-fit': 'cover',
                     'border-color': '#000',
                     'border-width': 3,
                     'border-opacity': 0.5,
                     'content': 'data(name)',
-                    'text-valign': 'bottom', // Align text to the top
+                    'text-valign': 'top', // Align text to the top
                     'text-halign': 'center',
-                    'text-margin-y': '8px', // Add margin below the text
+                    'text-margin-y': '-8px', // Add margin below the text
                     'text-background-color': '#fff', // Background color behind the text
                     'text-background-opacity': 0.5, // Opacity of the background
                     'color': '#000',
-                    'font-size': '20px'
+                    'font-size': '10px'
                 })
                 .selector('.eating')
                 .css({
@@ -67,16 +70,10 @@ const Graph = () => {
             },
 
             layout: {
-                name: 'preset', // Change the layout to 'preset'
-                positions: function (node) {
-                    if (node.id() === 'car') {
-                        return { x: 0, y: 0 }; // Position the 'car' node at the top-left corner
-                    } else {
-                        return undefined; // Use default position for other nodes
-                    }
-                },
+                name: 'dagre',
+                directed: true,
                 padding: 10
-            }
+              }
         });
 
         cy.userZoomingEnabled(false);
@@ -116,7 +113,7 @@ const Graph = () => {
             cy.add(elements);
 
             // Update the layout to accommodate the new nodes
-            cy.layout({ name: 'breadthfirst' }).run();
+            cy.layout({ name: 'dagre' }).run();
         }
 
         // Define an array of nodes

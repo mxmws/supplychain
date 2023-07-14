@@ -100,10 +100,9 @@ const fetchPredecessors = async (existingNodes, address_pairs) => {
           {/* Display product information */}
           <h4>Product Information</h4>
           <h5>Product Name: {product._name}</h5>
+          <h5>Product Address: {productAddress}</h5>
           <h5>Combined Carbon Footprint: {carbonFootprint.toString()}</h5>
           <h5>Labels: {product._labels}</h5>
-          <h5>Predecessors: {product.predecessors}</h5>
-          <h5>Successors: {product.successors}</h5>
           <h5>Download Files: <button><a href={product.swarmStorageAddress}>Download</a></button></h5>
           <Link to={`/graph/${productAddress}`}>
             <button>Show Graph</button>
