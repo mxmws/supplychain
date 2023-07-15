@@ -137,12 +137,12 @@ const Graph = () => {
                 existingNodes.push({
                     name: product._name,
                     id: startAddress,
-                    imageUrl: product.imageCid || "x",
+                    imageUrl: `https://w3s.link/ipfs/${product.imageCid || 'x'}`,
                 });
                 address_pairs.push({ address: startAddress, successors: product.predecessors });
 
                 await fetchPredecessors(existingNodes, address_pairs);
-
+                console.log(existingNodes)
                 addNodes(existingNodes);
             } catch (error) {
                 console.error(error);
@@ -164,7 +164,7 @@ const Graph = () => {
                     source: address_pairs[0].address,
                     id: predecessor,
                     name: predecessorProduct._name,
-                    imageUrl: predecessorProduct.imageCid || "x",
+                    imageUrl: `https://w3s.link/ipfs/${predecessorProduct.imageCid || 'x'}`,
                 });
 
                 const predecessorAddressPairs = {
