@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import supplyChain from "../contract" // Import supplyChain contract
+import supplyChain from "../supplyChain" // Import supplyChain contract
 import {Link} from "react-router-dom"
 
 const ProductInfo = () => {
@@ -24,7 +24,14 @@ const ProductInfo = () => {
       // Set the product state with the retrieved product data
       setProduct(product)
     } catch (error) {
-      console.error(error)
+      if (error.message.includes("resolver or addr is not configured for ENS name")) {
+        // Display "invalid ID" error in a popup window
+        window.alert("Invalid ID or Address")
+      } else {
+        // Handle other errors
+        console.error(error)
+        window.alert(error.message)
+      }
     }
   }
   const getCO2 = async () => {
@@ -54,11 +61,11 @@ const ProductInfo = () => {
         return sumCO2;
     } catch (error) {
         console.error(error);
-        // alert(error)
+        window.alert(error.message)
     }
-};
+  };
 
-const fetchPredecessors = async (existingNodes, address_pairs) => {
+  const fetchPredecessors = async (existingNodes, address_pairs) => {
     const predecessors = address_pairs.flatMap(pair => pair.successors);
     const uniquePredecessors = [...new Set(predecessors)];
 
@@ -82,16 +89,48 @@ const fetchPredecessors = async (existingNodes, address_pairs) => {
 
         await fetchPredecessors(existingNodes, [predecessorAddressPairs]);
     }
-};
+  };
+
+
 
   useEffect(() => {
     // Fetch product data when the component mounts or the productAddress changes
-    
-    
 
     fetchProduct()
     getCO2()
   }, [productAddress])
+
+
+
+  const getLabels = async() => {
+    const _labelNames = []
+    const labels = product._labels
+    for(let i=0; i<labels.length; i++){
+      const label = await supplyChain.getLabel(labels[i])
+      _labelNames[i] = label._name
+    }
+
+    return _labelNames
+  }
+
+
+  const [labelNames, setLabelNames] = useState([])
+  
+  useEffect(() => {
+    if (product) {
+      getLabels().then((result) => {
+        setLabelNames(result)
+      })
+    }
+  }, [product])
+  
+
+  const labelList = labelNames.map((labelName, index) => (
+    <Link to={`/label_info/${product._labels[index]}`} key={index}>
+        {labelName + " ; "}
+    </Link>
+  ))
+
 
   return (
     <div>
@@ -102,8 +141,9 @@ const fetchPredecessors = async (existingNodes, address_pairs) => {
           <h5>Product Name: {product._name}</h5>
           <h5>Product Address: {productAddress}</h5>
           <h5>Combined Carbon Footprint: {carbonFootprint.toString()}</h5>
-          <h5>Labels: {product._labels}</h5>
-          <h5>Download Files: <button><a href={product.swarmStorageAddress}>Download</a></button></h5>
+          <h5>Labels: {labelList}</h5>
+          <h5>Download PDF: <a href={`https://w3s.link/ipfs/${product.swarmStorageAddress}`} target="_blank">Download</a></h5>
+          <h5>Download Image: <a href={`https://w3s.link/ipfs/${product.imageCid}`} target="_blank">Download</a></h5>
           <Link to={`/graph/${productAddress}`}>
             <button>Show Graph</button>
           </Link>

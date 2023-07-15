@@ -9,7 +9,7 @@ const GetLabel = () => {
 
   // Event handler for input change
   const handleInputChange = (event) => {
-    setLabelAddress(event.target.value)
+      setLabelAddress(event.target.value)
   }
 
   return (

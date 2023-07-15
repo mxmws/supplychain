@@ -32,9 +32,9 @@ function App(){
         <div className="side-nav">
           {/* Link to pages */}
           <Link to="/" className='link-style'>Search Product</Link>
+          <Link to="/get_label" className='link-style'>Search Label</Link>
           <Link to="/add_product" className='link-style'>Add Product</Link>
           <Link to="/add_label" className='link-style'>Add Label</Link>
-          <Link to="/get_label" className='link-style'>Get Label</Link>
           <Link to="/add_link" className='link-style'>Add Link</Link>
           <Link to="/remove_link" className='link-style'>Remove Link</Link>
         </div>

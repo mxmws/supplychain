@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import supplyChain from "../contract"; // Import your supplyChain contract
+import supplyChain from "../supplyChain"; // Import your supplyChain contract
 import { Link } from "react-router-dom";
 
 

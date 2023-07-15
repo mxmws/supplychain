@@ -44,11 +44,11 @@
   color:rgb(44, 43, 43);
   text-decoration: none;
 }
-.link-style a:hover{
+.link-style p:hover{
   color:black;
 }
 
-.link-style a:visited{
+.link-style p:visited{
   color: antiquewhite;
 }
 
