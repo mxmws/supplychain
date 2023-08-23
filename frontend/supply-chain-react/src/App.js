@@ -22,7 +22,7 @@ function App(){
 
       {/* Header of website */}
       <div className="header">
-        <h1><a to="/">Make Supply Chain More Transparent</a></h1>
+        <h1><a to="/">Blockchain Supplychain</a></h1>
       </div>
 
       {/* Main container */}

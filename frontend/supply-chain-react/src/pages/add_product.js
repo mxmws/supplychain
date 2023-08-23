@@ -58,6 +58,7 @@ const AddProduct=()=>{
 
       // Return Product ID 
       console.log(event.args[2])
+      window.location.replace(`/product_info/${event.args[2]}`);
       return event.args[2]
     
     } catch (error) {

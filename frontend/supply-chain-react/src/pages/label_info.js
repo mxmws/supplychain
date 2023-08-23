@@ -64,6 +64,7 @@ const LabelInfo = () => {
         <div>
           <h4>Label Information</h4>
           <h5>Label Name: {label._name}</h5>
+          <h5>Label Address: {labelAddress}</h5>
           <h5>Labeled Products: {productList}</h5>
           <h5>Download PDF: <a href={`https://w3s.link/ipfs/${label._ipfsAddress}`} target="_blank">Download</a></h5>
           <h5>Download Image: <a href={`https://w3s.link/ipfs/${label._iamgeCid}`} target="_blank">Download</a></h5>

@@ -3,14 +3,14 @@
 }
 
 .header{
-  padding: 80px;
+  padding: 30px;
   text-align: center;
   background: #06733e;
   color: white;
 }
 
 .header h1 {
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .container {

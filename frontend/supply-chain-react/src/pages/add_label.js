@@ -49,6 +49,7 @@ const AddLabel=()=>{
       const event = receipt.events.find(event => event.event === 'LabelAdded')
       
       console.log(event.args[2])
+      window.location.replace(`/label_info/${event.args[2]}`);
       return event.args[2]
 
     } catch (error) {

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react";
 import supplyChainLinker from '../supplyChainLinker.js'
 import {ethers} from 'ethers'
 
@@ -56,7 +56,47 @@ async function addLink() {
   }
 }
 
+
 const AddLink=()=>{
+
+
+  useEffect(() => {
+    // Add event listeners to the select elements
+    const firstRelationInput = document.getElementById("firstRelationInput");
+    const secondRelationInput = document.getElementById("secondRelationInput");
+
+    const handleRelationChange = (event) => {
+      const selectedValue = event.target.value;
+      const correspondingValue = getCorrespondingValue(selectedValue);
+      if (event.target === firstRelationInput) {
+        secondRelationInput.value = correspondingValue;
+      } else if (event.target === secondRelationInput) {
+        firstRelationInput.value = correspondingValue;
+      }
+    };
+
+    firstRelationInput.addEventListener("change", handleRelationChange);
+    secondRelationInput.addEventListener("change", handleRelationChange);
+
+    return () => {
+      // Clean up the event listeners when the component unmounts
+      firstRelationInput.removeEventListener("change", handleRelationChange);
+      secondRelationInput.removeEventListener("change", handleRelationChange);
+    };
+  }, []);
+
+  const getCorrespondingValue = (selectedValue) => {
+    const relationPairs = {
+      "1": "2", // Predecessor -> Successor
+      "2": "1", // Successor -> Predecessor
+      "3": "4", // Label -> Product
+      "4": "3", // Product -> Label
+    };
+
+    return relationPairs[selectedValue] || "0"; // Default to "None" if no match
+  };
+
+
     return(
         <div>
             <h4>Add Link</h4>
