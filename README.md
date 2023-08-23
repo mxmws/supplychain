@@ -1,4 +1,19 @@
-## Getting started
+The goal of this project is to be able to represent supplychains of real products on the Ethereum blockchain.
+
+### Scope of the Project:
+1. Solidity smart contract
+2. Client to interact with the contract
+
+### Functionality of the Client:
+1. Add product
+2. Search product
+3. Add quality label
+4. Search quality label
+5. Add Link between products
+6. Link quality label to product
+7. Remove Link of any kind
+
+The client visualizes the supplychain as a tree graph.
 
 ### Setup Metamask with Goerli Testnetwork
 
@@ -24,24 +39,3 @@ To set up the frontend:
 ### Deploy Contract to Goerli Testnet
 
 To deploy a contract on the Goerli Testnet, follow the steps outlined in this [guide](https://vulehuan.com/en/blog/2023/05/deploy-your-blockchain-contract-on-remix-with-metamask-and-goerli-64680f9664ac40ae37cdf47a.html#gsc.tab=0). You may need between 0.1 and 0.5 GöETH for this process.
-
-### Host a Node
-
-*(Information on hosting a node is not provided.)*
-
-## Current Plan for Communication with the Chain
-
-**ETH Node**
-
-- Currently accessible via Infura API (key required)
-- Future: Self-hosted node
-
-**Frontend for Get functions**
-
-- Communicates with ETH Node
-
-**Frontend for Set functions**
-
-- Communicates with ETH Node
-- Requires private ETH key (use signer instead of provider!)
-
