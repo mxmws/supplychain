@@ -18,6 +18,16 @@
 						"type": "uint256"
 					},
 					{
+						"internalType": "string",
+						"name": "_ipfsAddress",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_imageCid",
+						"type": "string"
+					},
+					{
 						"internalType": "address",
 						"name": "_owner",
 						"type": "address"
@@ -25,25 +35,6 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "enum relation",
-						"name": "r",
-						"type": "uint8"
-					},
-					{
-						"indexed": false,
-						"internalType": "address[]",
-						"name": "ids",
-						"type": "address[]"
-					}
-				],
-				"name": "AcceptedHandshake",
-				"type": "event"
 			},
 			{
 				"inputs": [
@@ -155,9 +146,9 @@
 				"name": "Get_CarbonFootprint",
 				"outputs": [
 					{
-						"internalType": "uint256",
+						"internalType": "address[]",
 						"name": "",
-						"type": "uint256"
+						"type": "address[]"
 					}
 				],
 				"stateMutability": "view",
@@ -177,6 +168,19 @@
 						"internalType": "address[]",
 						"name": "",
 						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_ImageCid",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -249,38 +253,12 @@
 			},
 			{
 				"inputs": [],
-				"name": "Get_Predecessor_Count",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
 				"name": "Get_Predecessors",
 				"outputs": [
 					{
 						"internalType": "address[]",
 						"name": "",
 						"type": "address[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "Get_Successor_Count",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -348,82 +326,11 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "new_CarbonFootprint",
-						"type": "uint256"
-					}
-				],
-				"name": "Set_CarbonFootPrint",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_ipfsAddress",
-						"type": "string"
-					}
-				],
-				"name": "Set_IPFS",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "bool",
-						"name": "value",
-						"type": "bool"
-					}
-				],
-				"name": "Set_IsValue",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "new_name",
-						"type": "string"
-					}
-				],
-				"name": "Set_Name",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "owner",
 				"outputs": [
 					{
 						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "products",
-				"outputs": [
-					{
-						"internalType": "contract Product",
 						"name": "",
 						"type": "address"
 					}
@@ -449,30 +356,6 @@
 				],
 				"stateMutability": "pure",
 				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "userProducts",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -488,7 +371,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Product.sol": "Product"
+			"remix/contracts/Product.sol": "Product"
 		},
 		"evmVersion": "paris",
 		"libraries": {},
@@ -502,15 +385,15 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Handshaker.sol": {
-			"keccak256": "0x1cbb0ef5f834255c1aea2937e6bcc65bb6d9dbe51311eac7a77db15e69962a8e",
+		"remix/contracts/Handshaker.sol": {
+			"keccak256": "0x5721e60a7f34b1f9c6775d2a807d94460e3dace565afb2b2ad1dcfafbadb37df",
 			"license": "GPL-3.0-or-later",
 			"urls": [
-				"bzz-raw://c224b709dc331dbf9ab3545b559c91735ba153d1db442d9f66fc18b9755821e5",
-				"dweb:/ipfs/QmcskzeXpYiH2RnfZ2sPHhSjgyBhRw8KGXXkcyQUKiCukG"
+				"bzz-raw://dd176a49cb1b578edebe1941c05e43938858cbc91d1643b7f0800ee0464b251c",
+				"dweb:/ipfs/QmXCmoRksDLn3GNrfJ71HPLdFqqQkMuXhZ7iHi9t3FiVxy"
 			]
 		},
-		"contracts/Ownable.sol": {
+		"remix/contracts/Ownable.sol": {
 			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
 			"license": "GPL-3.0-or-later",
 			"urls": [
@@ -518,12 +401,12 @@
 				"dweb:/ipfs/QmRnL2hviBA7L735ah9mvQjbL3wLF7qEzQBuVhc9HRPkfh"
 			]
 		},
-		"contracts/Product.sol": {
-			"keccak256": "0xf8a0815524c1b8def93da8dbfa865104ea74633c64952415506e676253a0b0a2",
+		"remix/contracts/Product.sol": {
+			"keccak256": "0xbc662382d000aa12e1e6131c7b6d507d4ca3010c385be0b1f758b99026b02ca4",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a438a10b43292652e212fdb42a65d7f91bccea589ba944c1ea4ba38ba2732e3a",
-				"dweb:/ipfs/QmXa9hyJGogNFAc2bZHp16VxLf9gJJ6onik6QcjtMhrNK4"
+				"bzz-raw://9c4537ffcc5756dd07314405478daf1e01cd9f8e142ed1145630271287214806",
+				"dweb:/ipfs/Qmc2WXbKWhR1Qv6WkJi3c9EEhsvJ8QARvPPS6JXbfdr47W"
 			]
 		}
 	},

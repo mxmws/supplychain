@@ -13,6 +13,11 @@
 						"type": "string"
 					},
 					{
+						"internalType": "string",
+						"name": "_imageCid",
+						"type": "string"
+					},
+					{
 						"internalType": "address",
 						"name": "_owner",
 						"type": "address"
@@ -140,6 +145,32 @@
 						"internalType": "address[]",
 						"name": "",
 						"type": "address[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_ImageCid",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "Get_IpfsAddress",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -291,7 +322,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/Label.sol": "Label"
+			"remix/contracts/Label.sol": "Label"
 		},
 		"evmVersion": "paris",
 		"libraries": {},
@@ -305,23 +336,23 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/Handshaker.sol": {
-			"keccak256": "0x3b4c62dd3c2a6e1c2da9752651e836d1487fe17a6914100eb299bf79e4d92c2f",
+		"remix/contracts/Handshaker.sol": {
+			"keccak256": "0x5721e60a7f34b1f9c6775d2a807d94460e3dace565afb2b2ad1dcfafbadb37df",
 			"license": "GPL-3.0-or-later",
 			"urls": [
-				"bzz-raw://a7d2bd16b0e1a69cb634b31769cfba036519b87bc1d1accb9115c81fddab545c",
-				"dweb:/ipfs/QmQw8k7B2NTYcg58LyZbvv4mea7HGFzKqjjFFoboXRcuAX"
+				"bzz-raw://dd176a49cb1b578edebe1941c05e43938858cbc91d1643b7f0800ee0464b251c",
+				"dweb:/ipfs/QmXCmoRksDLn3GNrfJ71HPLdFqqQkMuXhZ7iHi9t3FiVxy"
 			]
 		},
-		"contracts/Label.sol": {
-			"keccak256": "0x9a7c6e0a6e1c3c06a1a704ec2b55281cc3b671920597142386e364efbee12181",
+		"remix/contracts/Label.sol": {
+			"keccak256": "0x05d3be548fb26b1662e2c35ccfb49d836363fda8a8cd3b35623fdcfa9f9c5776",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8b0d2baf0281efdce2f41532de5d3528d77869b12c3f237b50513188a9a25df1",
-				"dweb:/ipfs/QmUBfqEbdKcH1mVVbdnR3XothhL9LD9oCQL7niXLoP7YZU"
+				"bzz-raw://77bb5f58addf9caafb8c94fc2511e3a9a8dddb04153c6c18fbb25062b041850c",
+				"dweb:/ipfs/QmfEtFuuYPFLmMo2BPPZmdc2AGZxGYd3jrEFFFSyeU72YM"
 			]
 		},
-		"contracts/Ownable.sol": {
+		"remix/contracts/Ownable.sol": {
 			"keccak256": "0xd9cf87636f5adbfbb210fbe15b2611c2c2edd6070f8217791bdf598330b1bf5f",
 			"license": "GPL-3.0-or-later",
 			"urls": [
